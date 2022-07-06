@@ -9,16 +9,68 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "11.9.3",
+    "@emotion/styled": "11.9.3",
+    "axios": "0.27.2",
     "next": "12.2.0",
+    "qs": "6.11.0",
     "react": "18.2.0",
+    "react-device-detect": "2.2.2",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@types/node": "18.0.1",
     "@types/react": "18.0.14",
     "@types/react-dom": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "5.30.5",
+    "@typescript-eslint/parser": "5.30.5",
     "eslint": "8.19.0",
+    "eslint-config-airbnb": "19.0.4",
     "eslint-config-next": "12.2.0",
-    "typescript": "4.7.4"
+    "eslint-config-prettier": "8.5.0",
+    "eslint-import-resolver-typescript": "3.2.4",
+    "eslint-plugin-prettier": "4.2.1",
+    "lint-staged": "13.0.3",
+    "prettier": "2.7.1",
+    "typescript": "4.7.4",
+    "validate-commit-msg": "2.14.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --ext .jsx --ext .js --ext .tsx --ext .ts src/ --fix"
+    ]
+  },
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "init",
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "build",
+        "chore",
+        "revert"
+      ],
+      "scope": {
+        "required": false,
+        "allowed": [
+          "*"
+        ],
+        "validate": false,
+        "multiple": false
+      },
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "helpMessage": "커밋 메세지 형식 어긋남",
+      "autoFix": false
+    }
   }
 }
