@@ -1,13 +1,12 @@
 import BlogPagesLayout from "@bomsbro-blog-core/templates/BlogPagesLayout";
-import BlogHomeView from "@bomsbro-blog-home/views/BlogHomeView";
 import { NextPage } from "next";
 import React from "react";
-import BlogBoardView from "src/subapps/bomsbro-blog-board/views/BlogBoardView";
+import BlogPostView from "src/subapps/bomsbro-blog-posts/views/BlogPostView";
 
 const BlogBoardPage: NextPage = () => {
   return (
     <BlogPagesLayout>
-      <BlogBoardView />
+      <BlogPostView />
     </BlogPagesLayout>
   );
 };

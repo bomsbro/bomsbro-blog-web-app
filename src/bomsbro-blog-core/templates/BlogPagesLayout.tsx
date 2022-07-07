@@ -14,12 +14,14 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
           <nav>
             <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
               <li>
-                <a
-                  className="hover:text-gray-200 hover:underline px-4"
-                  href="blog/home"
-                >
-                  Blog
-                </a>
+                <Link href="/blog/home">
+                  <a
+                    className="hover:text-gray-200 hover:underline px-4"
+                    href="blog/home"
+                  >
+                    Blog
+                  </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -93,8 +95,8 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
                 Technology
               </a>
             </Link>
-            <Link href="/blog/board">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">Board</a>
+            <Link href="/blog/posts">
+              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">posts</a>
             </Link>
           </div>
         </div>

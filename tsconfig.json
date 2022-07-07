@@ -19,6 +19,9 @@
       "@bomsbro-blog-core/*": ["src/bomsbro-blog-core/*"],
       "@bomsbro-blog-platform/*": ["src/bomsbro-blog-platform/*"], 
       "@bomsbro-blog-home/*": ["src/subapps/bomsbro-blog-home/*"],
+      "@bomsbro-blog-posts/*": ["src/subapps/bomsbro-blog-posts/*"],
+      "@bomsbro-blog-profile/*": ["src/subapps/bomsbro-blog-profile/*"],
+      "@bomsbro-blog-project/*": ["src/subapps/bomsbro-blog-project/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
