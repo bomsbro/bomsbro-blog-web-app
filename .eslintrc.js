@@ -25,7 +25,9 @@ module.exports = {
     "import/extensions": 0,
     "import/no-extraneous-dependencies": 0,
     "react/require-default-props": 0,
+    "jsx-a11y/anchor-is-valid": 0,
     "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/function-component-definition": [
       2,
       {
