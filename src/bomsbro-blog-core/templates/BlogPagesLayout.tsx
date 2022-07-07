@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { ReactNode } from "react";
 
 interface BlogPagesLayoutProps {
@@ -15,7 +16,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
               <li>
                 <a
                   className="hover:text-gray-200 hover:underline px-4"
-                  href="#"
+                  href="blog/home"
                 >
                   Blog
                 </a>
@@ -74,21 +75,27 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
         </div>
         <div className="w-full flex-grow sm:flex sm:items-center sm:w-auto">
           <div className="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Home
-            </a>
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Profile
-            </a>
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Project
-            </a>
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Technology
-            </a>
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Board
-            </a>
+            <Link href="/blog/home">
+              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">Home</a>
+            </Link>
+            <Link href="/blog/profile">
+              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+                Profile
+              </a>
+            </Link>
+            <Link href="/blog/project">
+              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+                Project
+              </a>
+            </Link>
+            <Link href="/blog/technology">
+              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+                Technology
+              </a>
+            </Link>
+            <Link href="/blog/board">
+              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">Board</a>
+            </Link>
           </div>
         </div>
       </nav>

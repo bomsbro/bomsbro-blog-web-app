@@ -2,14 +2,13 @@ import BlogPagesLayout from "@bomsbro-blog-core/templates/BlogPagesLayout";
 import BlogHomeView from "@bomsbro-blog-home/views/BlogHomeView";
 import { NextPage } from "next";
 import React from "react";
-import BlogBoardView from "src/subapps/bomsbro-blog-board/views/BlogBoardView";
 
-const BlogBoardPage: NextPage = () => {
+const index: NextPage = () => {
   return (
     <BlogPagesLayout>
-      <BlogBoardView />
+      <BlogHomeView />
     </BlogPagesLayout>
   );
 };
 
-export default BlogBoardPage;
+export default index;
