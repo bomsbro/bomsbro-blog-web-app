@@ -1,6 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
-const SubAppHome = () => {
+interface BlogPagesLayoutProps {
+  children: ReactNode;
+}
+
+const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
   return (
     <>
       {/* <!-- Top Bar Nav --> */}
@@ -13,7 +17,7 @@ const SubAppHome = () => {
                   className="hover:text-gray-200 hover:underline px-4"
                   href="#"
                 >
-                  Shop
+                  Blog
                 </a>
               </li>
               <li>
@@ -43,7 +47,6 @@ const SubAppHome = () => {
           </div>
         </div>
       </nav>
-
       {/* <!-- Text Header --> */}
       <header className="w-full container mx-auto">
         <div className="flex flex-col items-center py-12">
@@ -56,7 +59,6 @@ const SubAppHome = () => {
           <p className="text-lg text-gray-600">Lorem Ipsum Dolor Sit Amet</p>
         </div>
       </header>
-
       {/* <!-- Topic Nav --> */}
       <nav
         className="w-full py-4 border-t border-b bg-gray-100"
@@ -73,28 +75,45 @@ const SubAppHome = () => {
         <div className="w-full flex-grow sm:flex sm:items-center sm:w-auto">
           <div className="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
             <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+              Home
+            </a>
+            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+              Profile
+            </a>
+            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+              Project
+            </a>
+            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
               Technology
             </a>
             <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Automotive
-            </a>
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Finance
-            </a>
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Politics
-            </a>
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Culture
-            </a>
-            <a href="#" className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-              Sports
+              Board
             </a>
           </div>
         </div>
       </nav>
+      {children}
+      <footer className="w-full border-t bg-white pb-12">
+        <div className="w-full container mx-auto flex flex-col items-center">
+          <div className="flex flex-col md:flex-row text-center md:text-left md:justify-between py-6">
+            <a href="#" className="uppercase px-3">
+              About Us
+            </a>
+            <a href="#" className="uppercase px-3">
+              Privacy Policy
+            </a>
+            <a href="#" className="uppercase px-3">
+              Terms & Conditions
+            </a>
+            <a href="#" className="uppercase px-3">
+              Contact Us
+            </a>
+          </div>
+          <div className="uppercase pb-6">&copy; myblog.com</div>
+        </div>
+      </footer>
     </>
   );
 };
 
-export default SubAppHome;
+export default BlogPagesLayout;

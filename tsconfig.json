@@ -13,7 +13,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true
+    "incremental": true,
+    "baseUrl": "./",
+    "paths": {
+      "@bomsbro-blog-core/*": ["src/bomsbro-blog-core/*"],
+      "@bomsbro-blog-platform/*": ["src/bomsbro-blog-platform/*"], 
+      "@bomsbro-blog-home/*": ["src/subapps/bomsbro-blog-home/*"],
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
