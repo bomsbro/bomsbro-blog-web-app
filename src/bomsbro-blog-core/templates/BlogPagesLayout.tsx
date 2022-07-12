@@ -57,9 +57,9 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
             className="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl"
             href="#"
           >
-            Minimal Blog
+            Bomsbro
           </a>
-          <p className="text-lg text-gray-600">Lorem Ipsum Dolor Sit Amet</p>
+          <p className="text-lg text-gray-600">FE Developer</p>
         </div>
       </header>
       {/* <!-- Topic Nav --> */}
