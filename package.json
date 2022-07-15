@@ -14,11 +14,13 @@
     "qs": "6.11.0",
     "react": "18.2.0",
     "react-device-detect": "2.2.2",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-query": "3.39.1"
   },
   "devDependencies": {
     "@types/node": "18.0.1",
-    "@types/react": "18.0.14",
+    "@types/qs": "6.9.7",
+    "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "@typescript-eslint/eslint-plugin": "5.30.5",
     "@typescript-eslint/parser": "5.30.5",

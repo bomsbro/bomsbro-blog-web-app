@@ -16,6 +16,7 @@ module.exports = {
     "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
+    "plugin:react/recommended",
   ],
   rules: {
     "react/jsx-filename-extension": 0,

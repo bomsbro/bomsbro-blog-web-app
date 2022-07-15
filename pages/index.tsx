@@ -5,7 +5,7 @@ import type { NextPage } from "next";
 const BomsbroBlog: NextPage = () => {
   const router = useRouter();
   useEffect(() => {
-    router.push("/blog");
+    router.push("/blog/home");
   }, [router]);
   return <div>this is bomsbro&apos;s blog</div>;
 };
