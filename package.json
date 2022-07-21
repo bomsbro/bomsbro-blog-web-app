@@ -1,0 +1,78 @@
+{
+  "name": "bomsbro-blog-web-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "axios": "0.27.2",
+    "next": "12.2.0",
+    "qs": "6.11.0",
+    "react": "18.2.0",
+    "react-device-detect": "2.2.2",
+    "react-dom": "18.2.0",
+    "react-query": "3.39.1"
+  },
+  "devDependencies": {
+    "@types/node": "18.0.1",
+    "@types/qs": "6.9.7",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "@typescript-eslint/eslint-plugin": "5.30.5",
+    "@typescript-eslint/parser": "5.30.5",
+    "autoprefixer": "10.4.7",
+    "eslint": "8.19.0",
+    "eslint-config-airbnb": "19.0.4",
+    "eslint-config-next": "12.2.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-prettier": "4.2.1",
+    "lint-staged": "13.0.3",
+    "postcss": "8.4.14",
+    "prettier": "2.7.1",
+    "tailwindcss": "3.1.4",
+    "typescript": "4.7.4",
+    "validate-commit-msg": "2.14.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "validate-commit-msg"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --ext .jsx --ext .js --ext .tsx --ext .ts src/ --fix"
+    ]
+  },
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "init",
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "build",
+        "chore",
+        "revert"
+      ],
+      "scope": {
+        "required": false,
+        "allowed": [
+          "*"
+        ],
+        "validate": false,
+        "multiple": false
+      },
+      "warnOnFail": false,
+      "maxSubjectLength": 100,
+      "helpMessage": "커밋 메세지 형식 어긋남",
+      "autoFix": false
+    }
+  }
+}

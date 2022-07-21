@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": "./",
+    "paths": {
+      "@bomsbro-blog-core/*": ["src/bomsbro-blog-core/*"],
+      "@bomsbro-blog-platform/*": ["src/bomsbro-blog-platform/*"], 
+      "@bomsbro-blog-home/*": ["src/subapps/bomsbro-blog-home/*"],
+      "@bomsbro-blog-posts/*": ["src/subapps/bomsbro-blog-posts/*"],
+      "@bomsbro-blog-profile/*": ["src/subapps/bomsbro-blog-profile/*"],
+      "@bomsbro-blog-project/*": ["src/subapps/bomsbro-blog-project/*"],
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
