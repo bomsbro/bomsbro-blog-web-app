@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Check-out to $GITHUB_WORKSPACE
+      # CHECK OUT TO $GITHUB_WORKSPACE
       - uses: actions/checkout@v3
           
       # DOCKER HUB
@@ -18,13 +18,18 @@ jobs:
         uses: docker/login-action@v1
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_TOKEN}}
-
-      - name: build and release to DockerHub
+          password: ${{secrets.DOCKERHUB_PASSWORD}}
+          
+      # BUILD IMAGE
+      - name: Compose Images
+        run: 
+          docker-compose up -d --build
+          
+      # PUSH IMAGE
+      - name: release to DockerHub
         env:
-          NAME: soosungp33 # 계정 명
-          REPO: actiontest # 레포 이름
-        run: |
-          docker build -t $REPO .
+          NAME: bomsbro # 계정 명
+          REPO: bomsbro-blog-web-app # 레포 이름
+        run: 
           docker tag $REPO:latest $NAME/$REPO:latest
           docker push $NAME/$REPO:latest      
