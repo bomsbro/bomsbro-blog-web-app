@@ -1,7 +1,7 @@
 FROM node:16-alpine
 
 # Set working directory
-WORKDIR /usr/zipbora-service-app
+WORKDIR /usr/bomsbro-blog-web-app
 
 # Copy "package.json" and "package-lock.json" before other files
 # Utilise Docker cache to save re-installing dependencies if unchanged
