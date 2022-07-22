@@ -13,8 +13,11 @@ services:
       - /var/data/certbot/www:/var/www/certbot # for ssl certification
       - /var/data/nginx # for default config
     ports:
-      - 80:80
-      - 443:443
+      - '80:80'
+      - '443:443'
+    expose:
+      - '80'
+      - '443'
   certbot: # certbot for ssl certification
       container_name: certbot-for-ssl
       image: certbot/certbot
