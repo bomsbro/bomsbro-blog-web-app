@@ -1,5 +1,7 @@
 FROM node:16-alpine
 
+RUN apk add --no-cache bash
+
 # Set working directory
 WORKDIR /usr/bomsbro-blog-web-app
 
