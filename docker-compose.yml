@@ -15,9 +15,9 @@ services:
       - /var/data/certbot/www:/var/www/certbot # for ssl certification
       - /var/data/nginx # for default config
   certbot: # certbot for ssl certification
-      container_name: certbot-for-ssl
-      image: certbot/certbot
-      volumes:
-          - /var/data/certbot/conf:/etc/letsencrypt
-          - /var/data/certbot/www:/var/www/certbot
-      entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    container_name: certbot-for-ssl
+    image: certbot/certbot
+    volumes:
+      - /var/data/certbot/conf:/etc/letsencrypt # for ssl certification
+      - /var/data/certbot/www:/var/www/certbot # for ssl certification
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
