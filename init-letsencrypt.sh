@@ -56,6 +56,7 @@ domain_args=""
 for domain in "${domains[@]}"; do
   domain_args="$domain_args -d $domain"
 done
+echo "domain arguments are $domain_args"
 
 # Select appropriate email arg
 case "$email" in
@@ -74,7 +75,7 @@ docker-compose run --rm --entrypoint "\
     --rsa-key-size $rsa_key_size \
     --agree-tos \
     --force-renewal" certbot
-echo
+echo 
 
 echo "### Reloading nginx ..."
 docker-compose exec nginx nginx -s reload
