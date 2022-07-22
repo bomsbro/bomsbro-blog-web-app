@@ -7,6 +7,7 @@ services:
       - '3000:3000'
     expose:
       - '3000'
+    restart: always
   nginx: 
     container_name: bomsbro-reverse-proxy
     build: ./nginx
@@ -14,6 +15,7 @@ services:
       - /var/data/certbot/conf:/etc/letsencrypt # for ssl certification
       - /var/data/certbot/www:/var/www/certbot # for ssl certification
       - /var/data/nginx # for default config
+    restart: always
   certbot: # certbot for ssl certification
     container_name: certbot-for-ssl
     image: certbot/certbot
