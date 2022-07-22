@@ -27,4 +27,4 @@ RUN rm -rf node_modules && yarn cache clean && yarn && yarn build
 USER node
 
 # Launch app with PM2
-CMD [ "pm2-runtime", "yarn", "--", "start" ]
+CMD [ "pm2-runtime", "start", "yarn", "--", "start" ]
