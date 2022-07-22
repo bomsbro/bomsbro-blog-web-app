@@ -14,7 +14,7 @@ services:
     volumes:
       - /var/data/certbot/conf:/etc/letsencrypt # for ssl certification
       - /var/data/certbot/www:/var/www/certbot # for ssl certification
-      - /var/data/nginx # for default config
+      - /var/data/nginx:/etc/nginx
     restart: always
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
   certbot: # certbot for ssl certification
