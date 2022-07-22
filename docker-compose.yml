@@ -11,7 +11,9 @@ services:
     expose:
       - '3000'
     restart: always
-  nginx: 
+  nginx:
+    networks:
+      - app-tier
     container_name: bomsbro-reverse-proxy
     build: ./nginx
     volumes:
@@ -19,6 +21,7 @@ services:
       - /var/data/certbot/www:/var/www/certbot # for ssl certification
       - /var/data/nginx # for default config
     restart: always
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
   certbot: # certbot for ssl certification
     container_name: certbot-for-ssl
     image: certbot/certbot
