@@ -10,11 +10,11 @@ services:
     restart: always
   nginx:
     container_name: bomsbro-reverse-proxy
-    build: ./nginx
     volumes:
       - /var/data/certbot/conf:/etc/letsencrypt # for ssl certification
       - /var/data/certbot/www:/var/www/certbot # for ssl certification
       - /var/data/nginx:/etc/nginx
+    build: ./nginx
     restart: always
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
   certbot: # certbot for ssl certification
