@@ -4,7 +4,9 @@ services:
     container_name: bomsbro-blog-web-app
     build: ./
     ports:
-      - 3000:3000
+      - '3000:3000'
+    expose:
+      - '3000'
   nginx: 
     container_name: bomsbro-reverse-proxy
     build: ./nginx
