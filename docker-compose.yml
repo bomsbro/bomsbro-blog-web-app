@@ -1,4 +1,7 @@
 version: '3.7'
+networks:
+    app-tier:
+        driver: bridge
 services:
   nextjs: 
     container_name: bomsbro-blog-web-app
