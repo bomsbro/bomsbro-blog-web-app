@@ -5,7 +5,7 @@ RUN rm /etc/nginx/conf.d/*
 
 # Copy config files
 # *.conf files in "conf.d/" dir get included in main config
-COPY ./conf.d /etc/nginx/conf.d/
+COPY ./default.conf /etc/nginx/conf.d/
 
 # Launch NGINX
 CMD [ "nginx", "-g", "daemon off;" ]
