@@ -1,18 +1,27 @@
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
+import { MenuIcon } from "@heroicons/react/outline";
+import TopNavSideDrawer from "@bomsbro-blog-core/components/outfits/TopNavSideDrawer";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
 }
 
 const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
+  const [topNaviDrawerVisible, setTopNavDrawerVisible] =
+    useState<boolean>(false);
+
+  const handleClickTopNavMenuButton = async () => {
+    setTopNavDrawerVisible(true);
+  };
+
   return (
     <>
       {/* <!-- Top Bar Nav --> */}
       <nav className="w-full py-4 bg-blue-800 shadow">
         <div className="w-full container mx-auto flex flex-wrap items-center justify-between">
           <nav>
-            <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
+            <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
               <li>
                 <Link href="/blog/home">
                   <a
@@ -23,33 +32,18 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
                   </a>
                 </Link>
               </li>
-              <li>
-                <a
-                  className="hover:text-gray-200 hover:underline px-4"
-                  href="#"
-                >
-                  About
-                </a>
-              </li>
             </ul>
           </nav>
 
-          <div className="flex items-center text-lg no-underline text-white pr-6">
-            <a className="" href="#">
-              <i className="fab fa-facebook" />
-            </a>
-            <a className="pl-6" href="#">
-              <i className="fab fa-instagram" />
-            </a>
-            <a className="pl-6" href="#">
-              <i className="fab fa-twitter" />
-            </a>
-            <a className="pl-6" href="#">
-              <i className="fab fa-linkedin" />
-            </a>
+          <div className="flex items-center pr-6 sm:hidden">
+            <MenuIcon
+              className="w-7 h-7 text-white"
+              onClick={handleClickTopNavMenuButton}
+            />
           </div>
         </div>
       </nav>
+
       {/* <!-- Text Header --> */}
       <header className="w-full container mx-auto">
         <div className="flex flex-col items-center py-12">
@@ -62,20 +56,10 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
           <p className="text-lg text-gray-600">FE Developer</p>
         </div>
       </header>
+
       {/* <!-- Topic Nav --> */}
-      <nav
-        className="w-full py-4 border-t border-b bg-gray-100"
-        x-data="{ open: false }"
-      >
-        <div className="block sm:hidden">
-          <a
-            href="#"
-            className="block md:hidden text-base font-bold uppercase text-center flex justify-center items-center"
-          >
-            Topics <i className="fas ml-2" />
-          </a>
-        </div>
-        <div className="w-full flex-grow sm:flex sm:items-center sm:w-auto">
+      <nav className="w-full py-4 border-t border-b bg-gray-100">
+        <div className="w-full flex-grow hidden sm:flex sm:items-center sm:w-auto">
           <div className="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
             <Link href="/blog/home">
               <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">Home</a>
@@ -121,6 +105,9 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
           <div className="uppercase pb-6">&copy; myblog.com</div>
         </div>
       </footer>
+
+      {/* <!--TopNav Mobile Haburger Drawer --> */}
+      {topNaviDrawerVisible && <TopNavSideDrawer />}
     </>
   );
 };

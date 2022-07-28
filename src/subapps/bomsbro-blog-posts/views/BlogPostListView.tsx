@@ -1,3 +1,4 @@
+import { MenuAlt2Icon } from "@heroicons/react/outline";
 import React from "react";
 
 const BlogPostListView: React.FC = () => {
@@ -7,7 +8,18 @@ const BlogPostListView: React.FC = () => {
       <div className="container mx-auto flex flex-wrap  py-6">
         {/* Sidebar Section */}
         <aside className="w-full md:w-1/3 flex flex-col items-center px-3">
-          <div className="w-full bg-white shadow flex flex-col my-4 p-6">
+          {/* Mobile MenuButton */}
+          <div className="w-full  md:hidden pt-1 pb-2 container mx-auto flex flex-wrap items-center justify-between">
+            <div className="flex items-center">
+              <MenuAlt2Icon
+                className="w-7 h-7 ml-1 mr-4"
+                onClick={() => console.log("하이")}
+              />
+              <p>Post Categories</p>
+            </div>
+          </div>
+          {/* Web MenuList */}
+          <div className="hidden md:flex w-full bg-white shadow flex-col my-4 p-6">
             <p className="text-xl font-semibold pb-5">About Us</p>
             <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
               Profile
