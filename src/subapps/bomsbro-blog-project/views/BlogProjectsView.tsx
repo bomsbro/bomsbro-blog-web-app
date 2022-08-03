@@ -54,7 +54,7 @@ const ProjectCard: React.FC<any> = ({ project }) => {
   );
 };
 
-const BlogProjectView: React.FC = () => {
+const BlogProjectsView: React.FC = () => {
   const fetchProjectList = async () => {
     return axios.get("https://api.github.com/users/bomsbro/repos");
   };
@@ -80,7 +80,7 @@ const BlogProjectView: React.FC = () => {
             </h1>
             <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
               {
-                `I am part of these ${(data?.data.length || 0) - 1} 
+                `I am part of these ${(data?.data.length || 1) - 1} 
             projects.` /* TODO: 1개 빼줘야 함 */
               }
             </p>
@@ -120,4 +120,4 @@ const BlogProjectView: React.FC = () => {
   );
 };
 
-export default BlogProjectView;
+export default BlogProjectsView;

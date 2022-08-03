@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
-import { useRouter } from "next/router";
-import type { NextPage } from "next";
+import BlogPagesLayout from "@bomsbro-blog-core/templates/BlogPagesLayout";
+import BlogHomeView from "@bomsbro-blog-home/views/BlogHomeView";
+import { NextPage } from "next";
+import React from "react";
 
-const BomsbroBlog: NextPage = () => {
-  const router = useRouter();
-  useEffect(() => {
-    router.push("/blog/home");
-  }, [router]);
-  return <div>this is bomsbro&apos;s blog</div>;
+const BlogHomePage: NextPage = () => {
+  return (
+    <BlogPagesLayout>
+      <BlogHomeView />
+    </BlogPagesLayout>
+  );
 };
 
-export default BomsbroBlog;
+export default BlogHomePage;
