@@ -1,13 +1,13 @@
 const gnbMenu = [
   {
-    key: "profile",
-    name: "profile",
-    path: "/profile",
-  },
-  {
     key: "home",
     name: "home",
     path: "/",
+  },
+  {
+    key: "profile",
+    name: "profile",
+    path: "/profile",
   },
   {
     key: "projects",

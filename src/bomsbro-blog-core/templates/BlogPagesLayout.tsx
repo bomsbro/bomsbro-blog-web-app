@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, { ReactNode, useState } from "react";
+import React, { MouseEventHandler, ReactNode, useState } from "react";
 import { MenuIcon } from "@heroicons/react/outline";
 import TopNavSideDrawer from "@bomsbro-blog-core/components/outfits/TopNavSideDrawer";
 import gnbMenu from "@bomsbro-blog-core/GnbMenu";
@@ -16,10 +16,13 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
     setTopNavDrawerVisible(true);
   };
 
+  const handleCloseDrawer = async () => {
+    setTopNavDrawerVisible(false);
+  };
   return (
     <>
       {/* <!-- Top Bar Nav --> */}
-      <nav className="w-full py-4 bg-blue-800 shadow">
+      <nav className="fixed z-20 h-14 sm:relative w-full py-4 bg-blue-800 shadow">
         <div className="w-full container mx-auto flex flex-wrap items-center justify-between">
           <nav>
             <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
@@ -46,7 +49,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
       </nav>
 
       {/* <!-- Text Header --> */}
-      <header className="w-full container mx-auto">
+      <header className="pt-14 sm:pt-0 w-full container mx-auto">
         <div className="flex flex-col items-center py-12">
           <a
             className="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl"
@@ -89,7 +92,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
               Privacy Policy
             </a>
             <a href="#" className="uppercase px-3">
-              Terms & Conditions
+              Terms &amp; Conditions
             </a>
             <a href="#" className="uppercase px-3">
               Contact Us
@@ -100,7 +103,9 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
       </footer>
 
       {/* <!--TopNav Mobile Haburger Drawer --> */}
-      {topNaviDrawerVisible && <TopNavSideDrawer />}
+      {topNaviDrawerVisible && (
+        <TopNavSideDrawer handleCloseDrawer={handleCloseDrawer} />
+      )}
     </>
   );
 };
