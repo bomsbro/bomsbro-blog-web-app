@@ -1,9 +1,9 @@
 import BlogPagesLayout from "@bomsbro-blog-core/templates/BlogPagesLayout";
 import BlogProjectView from "@bomsbro-blog-project/views/BlogProjectView";
-import { NextPage } from "next";
+import type { NextPage } from "next";
 import React from "react";
 
-const index: NextPage = () => {
+const ProejctPage: NextPage = () => {
   return (
     <BlogPagesLayout>
       <BlogProjectView />
@@ -11,4 +11,4 @@ const index: NextPage = () => {
   );
 };
 
-export default index;
+export default ProejctPage;
