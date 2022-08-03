@@ -2,6 +2,7 @@ import Link from "next/link";
 import React, { ReactNode, useState } from "react";
 import { MenuIcon } from "@heroicons/react/outline";
 import TopNavSideDrawer from "@bomsbro-blog-core/components/outfits/TopNavSideDrawer";
+import gnbMenu from "@bomsbro-blog-core/GnbMenu";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
@@ -57,35 +58,27 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
         </div>
       </header>
 
-      {/* <!-- Topic Nav --> */}
+      {/* <!-- Menu Nav Web--> */}
       <nav className="w-full py-4 border-t border-b bg-gray-100">
         <div className="w-full flex-grow hidden sm:flex sm:items-center sm:w-auto">
           <div className="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-            <Link href="/">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">Home</a>
-            </Link>
-            <Link href="profile">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-                Profile
-              </a>
-            </Link>
-            <Link href="projects">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-                Projects
-              </a>
-            </Link>
-            <Link href="technology">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-                Technology
-              </a>
-            </Link>
-            <Link href="posts">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">posts</a>
-            </Link>
+            {gnbMenu.map((menu) => {
+              return (
+                <Link key={menu.key} href={menu.path}>
+                  <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+                    {menu.name}
+                  </a>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>
+
+      {/* <!-- Contents --> */}
       {children}
+
+      {/* <!-- Footer --> */}
       <footer className="w-full border-t bg-white pb-12">
         <div className="w-full container mx-auto flex flex-col items-center">
           <div className="flex flex-col md:flex-row text-center md:text-left md:justify-between py-6">
