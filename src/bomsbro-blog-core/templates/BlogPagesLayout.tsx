@@ -3,6 +3,7 @@ import React, { MouseEventHandler, ReactNode, useState } from "react";
 import { MenuIcon } from "@heroicons/react/outline";
 import TopNavSideDrawer from "@bomsbro-blog-core/components/outfits/TopNavSideDrawer";
 import gnbMenu from "@bomsbro-blog-core/GnbMenu";
+import GnbHamburgerButton from "@bomsbro-blog-core/components/atoms/GnbHamburgerButton";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
@@ -40,10 +41,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
           </nav>
 
           <div className="flex items-center pr-6 sm:hidden">
-            <MenuIcon
-              className="w-7 h-7 text-white"
-              onClick={handleClickTopNavMenuButton}
-            />
+            <GnbHamburgerButton onClick={handleClickTopNavMenuButton} />
           </div>
         </div>
       </nav>

@@ -1,5 +1,5 @@
 import gnbMenu from "@bomsbro-blog-core/GnbMenu";
-import React, { MouseEventHandler } from "react";
+import React from "react";
 
 interface TopNavSideDrawerProps {
   handleCloseDrawer(): Promise<void>;
