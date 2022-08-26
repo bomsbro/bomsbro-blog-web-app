@@ -3,9 +3,7 @@ name: bomsbro-blog-webapp
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-
+    
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -35,7 +33,7 @@ jobs:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_PASSWORD}}
           
-      # PUSH IMAGE
+      # BACKUP IMAGE
       - name: release to DockerHub
         env:
           NAME: bomsbro # 계정 명
