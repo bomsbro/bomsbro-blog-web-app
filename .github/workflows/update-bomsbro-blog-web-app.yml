@@ -35,7 +35,7 @@ jobs:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_PASSWORD}}
           
-      # PUSH IMAGE
+      # BACKUP IMAGE
       - name: release to DockerHub
         env:
           NAME: bomsbro # 계정 명
