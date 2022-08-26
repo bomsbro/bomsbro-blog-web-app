@@ -8,10 +8,20 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       # CHECK OUT TO $GITHUB_WORKSPACE
       - uses: actions/checkout@v3
+        
+      # BUILD IMAGE
+      - name: Compose Images
+        run: 
+          docker-compose up -d --build
+      
+      # PULL AND LEARN IMAGE ON INSTANCE SSH
+      - name: Pull and Run Image on server
+      - run: bomsbro-blog-web-deploy.ssh
+          
           
       # DOCKER HUB
       - name: Login to DockerHub
@@ -19,11 +29,6 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_PASSWORD}}
-          
-      # BUILD IMAGE
-      - name: Compose Images
-        run: 
-          docker-compose up -d --build
           
       # PUSH IMAGE
       - name: release to DockerHub
