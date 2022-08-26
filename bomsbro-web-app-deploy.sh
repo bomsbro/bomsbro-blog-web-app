@@ -2,36 +2,23 @@
 
 set -e
 
-REMOTE_USERNAME="..."
-REMOTE_HOST="..."
-IMAGE_REPOSITORY="my_repository"
+REMOTE_HOST= $1
+REMOTE_SSH_PORT= $2
+REMOTE_USERNAME= $3
+REMOTE_PASSWORD= $4
+IMAGE_REPOSITORY= $5
 
-function upload_image_if_needed {
-	if [[ $(ssh $REMOTE_USERNAME@$REMOTE_HOST "docker images $IMAGE_REPOSITORY | grep $1 | tr -s ' ' | cut -d ' ' -f 3") != $(docker images $IMAGE_REPOSITORY | grep $1 | tr -s ' ' | cut -d ' ' -f 3) ]]
-	then
-		echo "$1 image changed, updating..."
-		docker save $IMAGE_REPOSITORY:$1 | bzip2 | pv | ssh $REMOTE_USERNAME@$REMOTE_HOST 'bunzip2 | docker load'
-	else
-		echo "$1 image did not change"
-	fi
-}
-
-function build_image {
-	docker build -t $IMAGE_REPOSITORY:$1 $2
-}
-
-build_image apache apache/
-build_image monitoring monitoring/
-
-upload_image_if_needed apache
-upload_image_if_needed monitoring
+if [[ $(ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST "docker images | grep $IMAGE_REPOSITORY | tr -s ' ' | cut -d ' ' -f 3") != $(docker images $IMAGE_REPOSITORY | grep $IMAGE_REPOSITORY | tr -s ' ' | cut -d ' ' -f 3) ]]
+then
+	echo "$IMAGE_REPOSITORY image changed, updating..."
+	docker save $IMAGE_REPOSITORY | bzip2 | pv | ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST 'bunzip2 | docker load'
+else
+	echo "$IMAGE_REPOSITORY image did not change"
+fi
 
 ssh -tt $REMOTE_USERNAME@$REMOTE_HOST << EOF
-docker rm -f ${IMAGE_REPOSITORY}_apache || true
-docker rm -f ${IMAGE_REPOSITORY}_monitoring || true
-
-docker run -d --name ${IMAGE_REPOSITORY}_apache $IMAGE_REPOSITORY:apache
-docker run -d --name ${IMAGE_REPOSITORY}_monitoring $IMAGE_REPOSITORY:monitoring
+docker rm -f ${IMAGE_REPOSITORY} || true
+docker run -d --name ${IMAGE_REPOSITORY} 
 
 exit
 EOF
