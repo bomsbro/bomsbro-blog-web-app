@@ -4,20 +4,23 @@ services:
     container_name: bomsbro-blog-web-app
     build: ./
     ports:
-      - 3000:3000
-  nginx: 
+      - '3000:3000'
+    expose:
+      - '3000'
+    restart: always
+  nginx:
     container_name: bomsbro-reverse-proxy
-    build: ./nginx
+    network_mode: "host"
     volumes:
-      - /boot/data/certbot/conf:/etc/letsencrypt # for ssl certification
-      - /boot/data/certbot/www:/var/www/certbot # for ssl certification
-    ports:
-      - 80:80
-      - 443:443
+      - /var/data/certbot/conf:/etc/letsencrypt # for ssl certification
+      - /var/data/certbot/www:/var/www/certbot # for ssl certification
+    build: ./nginx
+    restart: always
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
   certbot: # certbot for ssl certification
-      container_name: certbot-for-ssl
-      image: certbot/certbot
-      volumes:
-          - /boot/data/certbot/conf:/etc/letsencrypt
-          - /boot/data/certbot/www:/var/www/certbot
-      entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    container_name: certbot-for-ssl
+    image: certbot/certbot
+    volumes:
+      - /var/data/certbot/conf:/etc/letsencrypt # for ssl certification
+      - /var/data/certbot/www:/var/www/certbot # for ssl certification
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"

@@ -1,5 +1,7 @@
 FROM node:16-alpine
 
+RUN apk add --no-cache bash
+
 # Set working directory
 WORKDIR /usr/bomsbro-blog-web-app
 
@@ -27,4 +29,4 @@ RUN rm -rf node_modules && yarn cache clean && yarn && yarn build
 USER node
 
 # Launch app with PM2
-CMD [ "pm2-runtime", "dev", "yarn", "--", "start" ]
+CMD [ "pm2-runtime", "start", "--interpreter", "bash", "yarn", "--", "start" ]

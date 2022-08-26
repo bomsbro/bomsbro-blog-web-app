@@ -1,18 +1,32 @@
 import Link from "next/link";
-import React, { ReactNode } from "react";
+import React, { MouseEventHandler, ReactNode, useState } from "react";
+import { MenuIcon } from "@heroicons/react/outline";
+import TopNavSideDrawer from "@bomsbro-blog-core/components/outfits/TopNavSideDrawer";
+import gnbMenu from "@bomsbro-blog-core/GnbMenu";
+import GnbHamburgerButton from "@bomsbro-blog-core/components/atoms/GnbHamburgerButton";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
 }
 
 const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
+  const [topNaviDrawerVisible, setTopNavDrawerVisible] =
+    useState<boolean>(false);
+
+  const handleClickTopNavMenuButton = async () => {
+    setTopNavDrawerVisible(true);
+  };
+
+  const handleCloseDrawer = async () => {
+    setTopNavDrawerVisible(false);
+  };
   return (
     <>
       {/* <!-- Top Bar Nav --> */}
-      <nav className="w-full py-4 bg-blue-800 shadow">
+      <nav className="fixed z-20 h-14 sm:relative w-full py-4 bg-blue-800 shadow">
         <div className="w-full container mx-auto flex flex-wrap items-center justify-between">
           <nav>
-            <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline">
+            <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
               <li>
                 <Link href="/blog/home">
                   <a
@@ -23,35 +37,17 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
                   </a>
                 </Link>
               </li>
-              <li>
-                <a
-                  className="hover:text-gray-200 hover:underline px-4"
-                  href="#"
-                >
-                  About
-                </a>
-              </li>
             </ul>
           </nav>
 
-          <div className="flex items-center text-lg no-underline text-white pr-6">
-            <a className="" href="#">
-              <i className="fab fa-facebook" />
-            </a>
-            <a className="pl-6" href="#">
-              <i className="fab fa-instagram" />
-            </a>
-            <a className="pl-6" href="#">
-              <i className="fab fa-twitter" />
-            </a>
-            <a className="pl-6" href="#">
-              <i className="fab fa-linkedin" />
-            </a>
+          <div className="flex items-center pr-6 sm:hidden">
+            <GnbHamburgerButton onClick={handleClickTopNavMenuButton} />
           </div>
         </div>
       </nav>
+
       {/* <!-- Text Header --> */}
-      <header className="w-full container mx-auto">
+      <header className="pt-14 sm:pt-0 w-full container mx-auto">
         <div className="flex flex-col items-center py-12">
           <a
             className="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl"
@@ -62,46 +58,28 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
           <p className="text-lg text-gray-600">FE Developer</p>
         </div>
       </header>
-      {/* <!-- Topic Nav --> */}
-      <nav
-        className="w-full py-4 border-t border-b bg-gray-100"
-        x-data="{ open: false }"
-      >
-        <div className="block sm:hidden">
-          <a
-            href="#"
-            className="block md:hidden text-base font-bold uppercase text-center flex justify-center items-center"
-          >
-            Topics <i className="fas ml-2" />
-          </a>
-        </div>
-        <div className="w-full flex-grow sm:flex sm:items-center sm:w-auto">
+
+      {/* <!-- Menu Nav Web--> */}
+      <nav className="w-full py-4 border-t border-b bg-gray-100">
+        <div className="w-full flex-grow hidden sm:flex sm:items-center sm:w-auto">
           <div className="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-            <Link href="/blog/home">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">Home</a>
-            </Link>
-            <Link href="/blog/profile">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-                Profile
-              </a>
-            </Link>
-            <Link href="/blog/project">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-                Project
-              </a>
-            </Link>
-            <Link href="/blog/technology">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
-                Technology
-              </a>
-            </Link>
-            <Link href="/blog/posts">
-              <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">posts</a>
-            </Link>
+            {gnbMenu.map((menu) => {
+              return (
+                <Link key={menu.key} href={menu.path}>
+                  <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+                    {menu.name}
+                  </a>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </nav>
+
+      {/* <!-- Contents --> */}
       {children}
+
+      {/* <!-- Footer --> */}
       <footer className="w-full border-t bg-white pb-12">
         <div className="w-full container mx-auto flex flex-col items-center">
           <div className="flex flex-col md:flex-row text-center md:text-left md:justify-between py-6">
@@ -112,7 +90,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
               Privacy Policy
             </a>
             <a href="#" className="uppercase px-3">
-              Terms & Conditions
+              Terms &amp; Conditions
             </a>
             <a href="#" className="uppercase px-3">
               Contact Us
@@ -121,6 +99,11 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
           <div className="uppercase pb-6">&copy; myblog.com</div>
         </div>
       </footer>
+
+      {/* <!--TopNav Mobile Haburger Drawer --> */}
+      {topNaviDrawerVisible && (
+        <TopNavSideDrawer handleCloseDrawer={handleCloseDrawer} />
+      )}
     </>
   );
 };

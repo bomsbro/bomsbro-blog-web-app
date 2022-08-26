@@ -5,9 +5,9 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains="bomsbro.com www.bomsbro.com"
+domains=("bomsbro.com" "www.bomsbro.com")
 rsa_key_size=4096
-data_path="/boot/data/certbot"
+data_path="/var/data/certbot"
 email="transcend716@naver.com" # Adding a valid address is strongly recommended
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
@@ -56,6 +56,7 @@ domain_args=""
 for domain in "${domains[@]}"; do
   domain_args="$domain_args -d $domain"
 done
+echo "domain arguments are $domain_args"
 
 # Select appropriate email arg
 case "$email" in
@@ -74,7 +75,7 @@ docker-compose run --rm --entrypoint "\
     --rsa-key-size $rsa_key_size \
     --agree-tos \
     --force-renewal" certbot
-echo
+echo 
 
 echo "### Reloading nginx ..."
 docker-compose exec nginx nginx -s reload

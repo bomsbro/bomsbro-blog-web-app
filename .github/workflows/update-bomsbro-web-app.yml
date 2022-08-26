@@ -8,10 +8,26 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       # CHECK OUT TO $GITHUB_WORKSPACE
-      - uses: actions/checkout@v3
+      - name: Check out
+        uses: actions/checkout@v3
+        
+      # BUILD IMAGE
+      - name: Compose Images
+        run: 
+          docker-compose up -d --build
+      
+      # PULL AND LEARN IMAGE ON INSTANCE SSH
+      - name: Deploy Images
+      - run: bomsbro-blog-web-deploy.ssh 
+          ${{secrets.REMOTE_HOST}} 
+          ${{secrets.REMOTE_SSH_PORT}} 
+          ${{secrets.REMOTE_USERNAME}} 
+          ${{secrets.REMOTE_PASSWORD}}
+          'bomsbro-blog-web-app_nextjs'
+          
           
       # DOCKER HUB
       - name: Login to DockerHub
@@ -19,11 +35,6 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_PASSWORD}}
-          
-      # BUILD IMAGE
-      - name: Compose Images
-        run: 
-          docker-compose up -d --build
           
       # PUSH IMAGE
       - name: release to DockerHub
