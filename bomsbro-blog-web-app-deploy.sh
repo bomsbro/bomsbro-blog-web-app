@@ -2,11 +2,11 @@
 
 set -e
 
-REMOTE_HOST= $1
-REMOTE_SSH_PORT= $2
-REMOTE_USERNAME= $3
-REMOTE_PASSWORD= $4
-IMAGE_REPOSITORY= $5
+REMOTE_HOST= "$1"
+REMOTE_SSH_PORT= "$2"
+REMOTE_USERNAME= "$3"
+REMOTE_PASSWORD= "$4"
+IMAGE_REPOSITORY= "$5"
 
 if [[ $(ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST "docker images | grep $IMAGE_REPOSITORY | tr -s ' ' | cut -d ' ' -f 3") != $(docker images $IMAGE_REPOSITORY | grep $IMAGE_REPOSITORY | tr -s ' ' | cut -d ' ' -f 3) ]]
 then
