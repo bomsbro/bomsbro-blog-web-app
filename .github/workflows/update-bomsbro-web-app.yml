@@ -21,7 +21,7 @@ jobs:
           
       # PULL AND LEARN IMAGE ON INSTANCE SSH
       - name: Deploy Images
-        run: bomsbro-blog-web-app-deploy.ssh 
+        run: bash ${GITHUB_WORKSPACE}/bomsbro-blog-web-app-deploy.ssh 
           ${{secrets.REMOTE_HOST}} 
           ${{secrets.REMOTE_SSH_PORT}} 
           ${{secrets.REMOTE_USERNAME}} 
