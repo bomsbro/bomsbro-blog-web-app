@@ -18,8 +18,16 @@ jobs:
           docker-compose up -d --build
           
       # PULL AND LEARN IMAGE ON INSTANCE SSH
-      - name: Deploy Images
-        run: bash ${GITHUB_WORKSPACE}/bomsbro-blog-web-app-deploy.sh 
+      - name: Deploy Proxy
+        run: bash ${GITHUB_WORKSPACE}/scripts/bomsbro-blog-web-app-nginx-deploy.sh 
+          ${{secrets.REMOTE_HOST}} 
+          ${{secrets.REMOTE_SSH_PORT}} 
+          ${{secrets.REMOTE_USERNAME}} 
+          ${{secrets.REMOTE_PASSWORD}}
+          'bomsbro-blog-web-app_nginx'
+
+      - name: Deploy Webapp
+        run: bash ${GITHUB_WORKSPACE}/scripts/bomsbro-blog-web-app-nextjs-deploy.sh 
           ${{secrets.REMOTE_HOST}} 
           ${{secrets.REMOTE_SSH_PORT}} 
           ${{secrets.REMOTE_USERNAME}} 
