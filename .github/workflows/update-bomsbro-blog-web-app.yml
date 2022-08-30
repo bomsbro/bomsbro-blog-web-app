@@ -33,7 +33,11 @@ jobs:
           ${{secrets.REMOTE_USERNAME}} 
           ${{secrets.REMOTE_PASSWORD}}
           'bomsbro-blog-web-app_nextjs'
-          
+
+      # Clean Up Images
+      - name: Prune Images
+        run:  sshpass -p $REMOTE_PASSWORD ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST -o StrictHostKeyChecking=no 'docker image prune'
+
       # DOCKER HUB
       - name: Login to DockerHub
         uses: docker/login-action@v1
