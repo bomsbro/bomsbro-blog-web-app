@@ -17,7 +17,7 @@ jobs:
         run: 
           docker-compose up -d --build
           
-      # PULL AND LEARN IMAGE ON INSTANCE SSH
+      # PULL AND LEARN IMAGE ON INSTANCE
       - name: Deploy Proxy
         run: bash ${GITHUB_WORKSPACE}/scripts/bomsbro-blog-web-app-nginx-deploy.sh 
           ${{secrets.REMOTE_HOST}} 
@@ -34,19 +34,19 @@ jobs:
           ${{secrets.REMOTE_PASSWORD}}
           'bomsbro-blog-web-app_nextjs'
 
-      # Clean Up Images
+      # CLEAN UP IMAGES ON INSTACE
       - name: Prune Images
         run:  sshpass -p $REMOTE_PASSWORD ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST -o StrictHostKeyChecking=no 'docker image prune'
 
-      # DOCKER HUB
-      - name: Login to DockerHub
+      # SING IN DOCKER HUB
+      - name: Sign in
         uses: docker/login-action@v1
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_PASSWORD}}
           
-      # BACKUP IMAGE
-      - name: release to DockerHub
+      # BACK UP IMAGE ON DOCKER HUB REPOSITORY
+      - name: Release images
         env:
           NAME: bomsbro # 계정 명
           REPO: bomsbro-blog-web-app # 레포 이름
