@@ -17,9 +17,9 @@ else
 fi
 
 sshpass -p $REMOTE_PASSWORD ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST -o StrictHostKeyChecking=no << 'EOF'
-	echo ${IMAGE_REPOSITORY}
-	docker stop ${IMAGE_REPOSITORY} || true
-	docker rm -f ${IMAGE_REPOSITORY} || true
-	docker run -d --net=host --name ${IMAGE_REPOSITORY} --restart always ${IMAGE_REPOSITORY}
-	exit
+	echo $IMAGE_REPOSITORY;
+	docker stop $IMAGE_REPOSITORY || true;
+	docker rm -f $IMAGE_REPOSITORY || true;
+	docker run -d --net=host --name $IMAGE_REPOSITORY --restart always $IMAGE_REPOSITORY;
+	exit;
 EOF
