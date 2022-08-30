@@ -1,4 +1,4 @@
-name: bomsbro-blog-api
+name: bomsbro-blog-webapp
 
 on:
   push:
@@ -17,31 +17,39 @@ jobs:
         run: 
           docker-compose up -d --build
           
-      # SAVE AND RUN IMAGE ON INSTANCE
-      - name: Deploy API
-        run: bash ${GITHUB_WORKSPACE}/scripts/bomsbro-blog-api-deploy.sh 
+      # PULL AND LEARN IMAGE ON INSTANCE
+      - name: Deploy Proxy
+        run: bash ${GITHUB_WORKSPACE}/scripts/bomsbro-blog-web-app-nginx-deploy.sh 
           ${{secrets.REMOTE_HOST}} 
           ${{secrets.REMOTE_SSH_PORT}} 
           ${{secrets.REMOTE_USERNAME}} 
           ${{secrets.REMOTE_PASSWORD}}
-          'bomsbro-blog-api'
+          'bomsbro-blog-web-app_nginx'
 
-      # CLEANUP IMAGES ON INSTANCE
+      - name: Deploy Webapp
+        run: bash ${GITHUB_WORKSPACE}/scripts/bomsbro-blog-web-app-nextjs-deploy.sh 
+          ${{secrets.REMOTE_HOST}} 
+          ${{secrets.REMOTE_SSH_PORT}} 
+          ${{secrets.REMOTE_USERNAME}} 
+          ${{secrets.REMOTE_PASSWORD}}
+          'bomsbro-blog-web-app_nextjs'
+
+      # CLEAN UP IMAGES ON INSTACE
       - name: Prune Images
         run:  sshpass -p $REMOTE_PASSWORD ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST -o StrictHostKeyChecking=no 'docker image prune'
 
-      # DOCKER HUB
+      # SING IN DOCKER HUB
       - name: Sign in
         uses: docker/login-action@v1
         with:
           username: ${{secrets.DOCKERHUB_USERNAME}}
           password: ${{secrets.DOCKERHUB_PASSWORD}}
           
-      # BACKUP IMAGE
-      - name: Release Images
+      # BACK UP IMAGE ON DOCKER HUB REPOSITORY
+      - name: Release images
         env:
           NAME: bomsbro # 계정 명
-          REPO: bomsbro-blog-api # 레포 이름
+          REPO: bomsbro-blog-web-app # 레포 이름
         run: 
           docker tag $REPO:latest $NAME/$REPO:latest
           docker push $NAME/$REPO:latest      
