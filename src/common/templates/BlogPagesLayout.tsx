@@ -23,7 +23,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
   return (
     <>
       {/* <!-- Top Bar Nav --> */}
-      <nav className="fixed z-20 h-14 sm:relative py-4 bg-blue-800 shadow">
+      <nav className="fixed w-full z-20 h-14 sm:relative py-4 bg-blue-800 shadow">
         <div className="container max-w-screen-xl w-full mx-auto flex flex-wrap items-center justify-between">
           <nav>
             <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">

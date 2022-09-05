@@ -23,10 +23,18 @@ const GnbHamburgerButton: React.FC<GnbHamburgerButtonProps> = ({
     });
   }, []);
 
+  const handleClickButton = () => {
+    onClick();
+  };
+
   return (
-    <div className="flex justify-center align-middle w-8 h-8 overflow-hidden">
+    <button
+      type="button"
+      onClick={handleClickButton}
+      className="flex justify-center align-middle w-8 h-8 overflow-hidden"
+    >
       <div className="w-8 h-8" ref={lottieIcon} />
-    </div>
+    </button>
   );
 };
 
