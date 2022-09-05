@@ -1,6 +1,6 @@
 import React from "react";
-import BlogPagesLayout from "@bomsbro-blog-core/templates/BlogPagesLayout";
-import BlogPostView from "@bomsbro-blog-posts/views/BlogPostView";
+import BlogPagesLayout from "src/common/templates/BlogPagesLayout";
+import BlogPostView from "src/apps/posts/views/BlogPostView";
 
 const PostDetailPage = () => {
   return (

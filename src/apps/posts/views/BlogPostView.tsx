@@ -2,7 +2,7 @@ import React from "react";
 
 const BlogPostView = () => {
   return (
-    <div className="container mx-auto flex flex-wrap py-6">
+    <div className="flex flex-wrap py-6">
       {/* Post Section */}
 
       <article className="flex flex-col shadow my-4">

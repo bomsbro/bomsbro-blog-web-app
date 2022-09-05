@@ -2,7 +2,7 @@ import React from "react";
 
 const AuthorCard: React.FC = () => {
   return (
-    <div>
+    <div className="container mx-auto flex flex-wrap py-6">
       <div>
         <div className="md:block flex justify-center items-center">
           <img
@@ -200,17 +200,15 @@ const TimeLine: React.FC = () => {
 
 const BlogProfileView: React.FC = () => {
   return (
-    <div>
-      <div className="dark:bg-gray-900 mt-6">
-        <div className="max-w-screen-lg md:flex mx-auto dark:bg-gray-900">
-          <div className="md:w-1/3 p-2 md:flex md:justify-center">
-            <AuthorCard />
-          </div>
-          <div className="md:w-2/3 px-8">
-            <AuthorIntro />
-            <Expertise />
-            <TimeLine />
-          </div>
+    <div className="dark:bg-gray-900 mt-6">
+      <div className="w-full md:flex mx-auto dark:bg-gray-900">
+        <div className="md:w-1/3 p-2 md:flex md:justify-center">
+          <AuthorCard />
+        </div>
+        <div className="md:w-2/3 px-8">
+          <AuthorIntro />
+          <Expertise />
+          <TimeLine />
         </div>
       </div>
     </div>

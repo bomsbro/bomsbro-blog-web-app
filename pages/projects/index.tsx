@@ -1,5 +1,5 @@
-import BlogPagesLayout from "@bomsbro-blog-core/templates/BlogPagesLayout";
-import BlogProjectsView from "@bomsbro-blog-project/views/BlogProjectsView";
+import BlogPagesLayout from "src/common/templates/BlogPagesLayout";
+import BlogProjectsView from "src/apps/project/views/BlogProjectsView";
 import type { NextPage } from "next";
 import React from "react";
 

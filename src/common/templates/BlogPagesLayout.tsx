@@ -1,9 +1,9 @@
 import Link from "next/link";
 import React, { MouseEventHandler, ReactNode, useState } from "react";
 import { MenuIcon } from "@heroicons/react/outline";
-import TopNavSideDrawer from "@bomsbro-blog-core/components/outfits/TopNavSideDrawer";
-import gnbMenu from "@bomsbro-blog-core/GnbMenu";
-import GnbHamburgerButton from "@bomsbro-blog-core/components/atoms/GnbHamburgerButton";
+import TopNavSideDrawer from "src/common/components/outfits/TopNavSideDrawer";
+import gnbMenu from "src/common/GnbMenu";
+import GnbHamburgerButton from "src/common/components/atoms/GnbHamburgerButton";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
@@ -23,8 +23,8 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
   return (
     <>
       {/* <!-- Top Bar Nav --> */}
-      <nav className="fixed z-20 h-14 sm:relative w-full py-4 bg-blue-800 shadow">
-        <div className="w-full container mx-auto flex flex-wrap items-center justify-between">
+      <nav className="fixed z-20 h-14 sm:relative py-4 bg-blue-800 shadow">
+        <div className="container max-w-screen-xl w-full mx-auto flex flex-wrap items-center justify-between">
           <nav>
             <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
               <li>
@@ -48,7 +48,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
 
       {/* <!-- Text Header --> */}
       <header className="pt-14 sm:pt-0 w-full container mx-auto">
-        <div className="flex flex-col items-center py-12">
+        <div className="container max-w-screen-xl w-full mx-auto flex flex-col items-center py-12">
           <a
             className="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl"
             href="#"
@@ -77,7 +77,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
       </nav>
 
       {/* <!-- Contents --> */}
-      {children}
+      <div className="container max-w-screen-xl w-full mx-auto">{children}</div>
 
       {/* <!-- Footer --> */}
       <footer className="w-full border-t bg-white pb-12">

@@ -5,7 +5,7 @@ const BlogPostListView: React.FC = () => {
   return (
     <>
       {/* Content Area */}
-      <div className="flex flex-wrap container mx-auto py-6">
+      <div className="flex flex-wrap py-6">
         {/* Sidebar Section */}
         <aside className="w-full md:w-1/3 flex flex-col items-center px-3">
           {/* Mobile MenuBar */}

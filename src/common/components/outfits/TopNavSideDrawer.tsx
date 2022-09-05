@@ -1,4 +1,4 @@
-import gnbMenu from "@bomsbro-blog-core/GnbMenu";
+import gnbMenu from "src/common/GnbMenu";
 import React from "react";
 
 interface TopNavSideDrawerProps {
