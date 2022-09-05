@@ -15,10 +15,17 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
   const [signInDialogVisible, setSignInDialogVisible] =
     useState<boolean>(false);
 
+  const initModals = () => {
+    setMenuDrawerVisible(false);
+    setSignInDialogVisible(false);
+  };
+
   const handleClickMenu = async () => {
+    initModals();
     setMenuDrawerVisible(true);
   };
   const handleClickSignIn = async () => {
+    initModals();
     setSignInDialogVisible(true);
   };
 
@@ -47,7 +54,9 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
             >
               SignIn
             </button>
-            <GnbHamburgerButton onClick={handleClickMenu} />
+            <div className="sm:hidden">
+              <GnbHamburgerButton onClick={handleClickMenu} />
+            </div>
           </div>
         </nav>
       </nav>
