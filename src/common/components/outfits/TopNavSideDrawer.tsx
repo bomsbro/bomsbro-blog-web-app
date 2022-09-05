@@ -1,13 +1,11 @@
-import gnbMenu from "src/common/GnbMenu";
+import gnbMenu from "@common/constants/GnbMenu";
 import React from "react";
 
 interface TopNavSideDrawerProps {
-  handleCloseDrawer(): Promise<void>;
+  handleClose(): Promise<void>;
 }
 
-const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({
-  handleCloseDrawer,
-}) => {
+const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
   return (
     <>
       {/*
@@ -31,13 +29,13 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({
         </transition>
       */}
       <div
-        className="fixed inset-0 bg-gray-700 bg-opacity-75 transition-opacity w-full h-full z-30 sm:hidden"
-        onClick={handleCloseDrawer}
-        onKeyDown={handleCloseDrawer}
+        className="fixed inset-0 w-full h-full z-30 bg-gray-700 bg-opacity-75 transition-opacity sm:hidden"
+        onClick={handleClose}
+        onKeyDown={handleClose}
         role="button"
         tabIndex={0}
       >
-        <aside className="transform top-0 left-0 w-64 bg-white fixed h-full overflow-auto ease-in-out transition-all duration-300 z-50 rounded-tr-3xl">
+        <aside className="fixed h-full top-0 left-0 w-64 bg-white overflow-auto ease-in-out transform transition-all duration-300 z-50 rounded-tr-3xl">
           <span className="flex w-full items-center p-4 border-b">
             <img
               src="/logos/fox-hub.png"

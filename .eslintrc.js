@@ -38,14 +38,23 @@ module.exports = {
     ],
   },
   settings: {
+    react: {
+      version: "detect",
+    },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"],
+      "@typescript-eslint/parser": [".ts", ".tsx", ".js", "json"],
     },
     "import/resolver": {
       typescript: {},
     },
-    react: {
-      version: "detect",
-    },
   },
+  ignorePatterns: [
+    "build/**",
+    "dist/**",
+    "node_modules/",
+    "tsconfig.paths.json",
+    ".eslintrc.js",
+    "craco.config.js",
+    ".next",
+  ],
 };

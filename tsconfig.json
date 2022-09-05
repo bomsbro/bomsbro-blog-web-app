@@ -16,12 +16,11 @@
     "incremental": true,
     "baseUrl": "./",
     "paths": {
-      "@bomsbro-blog-core/*": ["src/common/*"],
-      "@bomsbro-blog-platform/*": ["src/bomsbro-blog-platform/*"], 
-      "@bomsbro-blog-home/*": ["src/apps/home/*"],
-      "@bomsbro-blog-posts/*": ["src/apps/posts/*"],
-      "@bomsbro-blog-profile/*": ["src/apps/profile/*"],
-      "@bomsbro-blog-project/*": ["src/apps/project/*"],
+      "@common/*": ["./src/common/*"],
+      "@home/*": ["./src/apps/home/*"],
+      "@posts/*": ["./src/apps/posts/*"],
+      "@profile/*": ["./src/apps/profile/*"],
+      "@project/*": ["./src/apps/project/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

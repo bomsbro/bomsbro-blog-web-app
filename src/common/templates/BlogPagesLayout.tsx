@@ -1,49 +1,55 @@
 import Link from "next/link";
-import React, { MouseEventHandler, ReactNode, useState } from "react";
-import { MenuIcon } from "@heroicons/react/outline";
+import React, { ReactNode, useState } from "react";
 import TopNavSideDrawer from "src/common/components/outfits/TopNavSideDrawer";
-import gnbMenu from "src/common/GnbMenu";
-import GnbHamburgerButton from "src/common/components/atoms/GnbHamburgerButton";
+import gnbMenu from "@common/constants/GnbMenu";
+
+import SignInDialog from "@common/components/outfits/SignInDialog";
+import GnbHamburgerButton from "@common/components/atoms/GnbHamburgerButton";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
 }
 
 const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
-  const [topNaviDrawerVisible, setTopNavDrawerVisible] =
+  const [MenuDrawerVisible, setMenuDrawerVisible] = useState<boolean>(false);
+  const [signInDialogVisible, setSignInDialogVisible] =
     useState<boolean>(false);
 
-  const handleClickTopNavMenuButton = async () => {
-    setTopNavDrawerVisible(true);
+  const handleClickMenu = async () => {
+    setMenuDrawerVisible(true);
+  };
+  const handleClickSignIn = async () => {
+    setSignInDialogVisible(true);
   };
 
-  const handleCloseDrawer = async () => {
-    setTopNavDrawerVisible(false);
-  };
   return (
     <>
       {/* <!-- Top Bar Nav --> */}
       <nav className="fixed w-full z-20 h-14 sm:relative py-4 bg-blue-800 shadow">
-        <div className="container max-w-screen-xl w-full mx-auto flex flex-wrap items-center justify-between">
-          <nav>
-            <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
-              <li>
-                <Link href="/blog/home">
-                  <a
-                    className="hover:text-gray-200 hover:underline px-4"
-                    href="blog/home"
-                  >
-                    Blog
-                  </a>
-                </Link>
-              </li>
-            </ul>
-          </nav>
-
-          <div className="flex items-center pr-6 sm:hidden">
-            <GnbHamburgerButton onClick={handleClickTopNavMenuButton} />
+        <nav className="container max-w-screen-xl w-full mx-auto flex flex-wrap items-center justify-between">
+          <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
+            <li>
+              <Link href="/blog/home">
+                <a
+                  className="hover:text-gray-200 hover:underline px-4"
+                  href="blog/home"
+                >
+                  Blog
+                </a>
+              </Link>
+            </li>
+          </ul>
+          <div className="flex items-center pr-6 ">
+            <button
+              type="button"
+              onClick={handleClickSignIn}
+              className="bg-white"
+            >
+              SignIn
+            </button>
+            <GnbHamburgerButton onClick={handleClickMenu} />
           </div>
-        </div>
+        </nav>
       </nav>
 
       {/* <!-- Text Header --> */}
@@ -100,9 +106,21 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
         </div>
       </footer>
 
-      {/* <!--TopNav Mobile Haburger Drawer --> */}
-      {topNaviDrawerVisible && (
-        <TopNavSideDrawer handleCloseDrawer={handleCloseDrawer} />
+      {/* <!--Global Menu Drawer --> */}
+      {MenuDrawerVisible && (
+        <TopNavSideDrawer
+          handleClose={async () => {
+            setMenuDrawerVisible(false);
+          }}
+        />
+      )}
+      {/* <!--SignIn Dialog --> */}
+      {signInDialogVisible && (
+        <SignInDialog
+          handleClose={async () => {
+            setSignInDialogVisible(false);
+          }}
+        />
       )}
     </>
   );
