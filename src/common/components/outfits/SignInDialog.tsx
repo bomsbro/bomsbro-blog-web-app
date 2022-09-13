@@ -8,10 +8,15 @@ const SignInDialog: React.FC<SignInDialog> = ({ handleClose }) => {
   return (
     <>
       {/* BackDrop */}
-      <div className="fixed inset-0 w-full h-full z-30 pin bg-black opacity-75" />
+      <div
+        onClick={handleClose}
+        onKeyDown={handleClose}
+        className="fixed inset-0 w-full h-full z-30 pin bg-black opacity-75"
+        role="presentation"
+      />
 
       {/* Contents */}
-      <div className="fixed inset-0 w-full mx-6 m-8 z-50 md:mx-auto md:w-1/2 lg:w-1/3  ">
+      <div className="fixed inset-0 w-full p-8 z-50 md:mx-auto md:w-1/2 lg:w-1/3  ">
         <div className="shadow-lg bg-white rounded-lg p-8">
           <div className="flex justify-end mb-6">
             <button type="button" onClick={handleClose}>

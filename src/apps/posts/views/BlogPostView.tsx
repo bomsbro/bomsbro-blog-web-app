@@ -1,6 +1,10 @@
 import React from "react";
 
-const BlogPostView = () => {
+interface BlogPostViewProps {
+  postCategory: number;
+}
+
+const BlogPostView: React.FC<BlogPostViewProps> = ({ postCategory }) => {
   return (
     <div className="flex flex-wrap py-6">
       {/* Post Section */}
