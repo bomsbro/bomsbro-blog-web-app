@@ -1,7 +1,48 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
-import React from "react";
+import axios from "axios";
+import Link from "next/link";
+import React, { useEffect } from "react";
+import { useQuery } from "react-query";
 
-const BlogPostListView: React.FC = () => {
+interface BlogPostListViewProps {
+  postCategory: number;
+}
+
+const BlogPostListView: React.FC<BlogPostListViewProps> = ({
+  postCategory,
+}) => {
+  const fetchPostCategoryList = async () => {
+    return axios.get(`https://bomsbro.com/api/post-categories/`);
+  };
+
+  const fetchPostList = async () => {
+    return axios.get(
+      `https://bomsbro.com/api/post-categories/${postCategory}/posts`
+    );
+  };
+
+  const { data: postList, error: postListError } = useQuery(
+    ["post-list", postCategory],
+    fetchPostList,
+    {
+      onSuccess: async (res) => {
+        // 성공시 호출
+        console.log(res);
+      },
+    }
+  );
+
+  const { data: categoryList, error: categoryListError } = useQuery(
+    "post-categories",
+    fetchPostCategoryList,
+    {
+      onSuccess: async (res) => {
+        // 성공시 호출
+        console.log(res);
+      },
+    }
+  );
+
   return (
     <>
       {/* Content Area */}
@@ -20,64 +61,65 @@ const BlogPostListView: React.FC = () => {
           </div>
           {/* Web Menu SideBar */}
           <div className="hidden md:flex w-full bg-white shadow flex-col my-4 p-6">
-            <p className="text-xl font-semibold pb-5">About Us</p>
-            <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-              Profile
-            </li>
-            <li className="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">
-              Settings
-            </li>
-            <li className="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">
-              Messages
-            </li>
-            <a
-              href="#"
+            <p className="text-xl font-semibold pb-5">카테고리</p>
+            {categoryList?.data.data.map((item: any) => {
+              return (
+                <Link key={item.id} href={`/posts?postCategory=${item.id}`}>
+                  <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                    {item.name}
+                  </li>
+                </Link>
+              );
+            })}
+          </div>
+          <Link href="/posts/write">
+            <button
+              type="button"
               className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4"
             >
-              Get to know us
-            </a>
-          </div>
+              글쓰기
+            </button>
+          </Link>
         </aside>
         {/* Posts Section */}
         <section className="w-full md:w-2/3 flex flex-col items-center px-3">
-          <article className="flex flex-col shadow my-4">
-            {/* Article Image */}
-            <a href="#" className="hover:opacity-75">
-              <img
-                src="https://source.unsplash.com/collection/1346951/1000x500?sig=1"
-                alt=""
-              />
-            </a>
-            <div className="bg-white flex flex-col justify-start p-6">
-              <a
-                href="#"
-                className="text-blue-700 text-sm font-bold uppercase pb-4"
-              >
-                Technology
-              </a>
-              <a
-                href="#"
-                className="text-3xl font-bold hover:text-gray-700 pb-4"
-              >
-                Lorem Ipsum Dolor Sit Amet Dolor Sit Amet
-              </a>
-              <p className="text-sm pb-3">
-                By{" "}
-                <a href="#" className="font-semibold hover:text-gray-800">
-                  David Grzyb
-                </a>
-                , Published on April 25th, 2020
-              </p>
-              <a href="#" className="pb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-                quis porta dui. Ut eu iaculis massa. Sed ornare ligula lacus,
-                quis iaculis dui porta volutpat. In sit amet posuere magna..
-              </a>
-              <a href="#" className="uppercase text-gray-800 hover:text-black">
-                Continue Reading <i className="fas fa-arrow-right" />
-              </a>
-            </div>
-          </article>
+          {/* Post Item */}
+          {postList?.data.data.map((item: any) => {
+            return (
+              <Link key={item.id} href={`/posts/${item.id}`}>
+                <article className="w-full flex flex-col shadow my-4">
+                  {/* Article Image */}
+
+                  <img
+                    src="https://source.unsplash.com/random/1000x500?sig=1"
+                    alt=""
+                  />
+
+                  <div className="bg-white flex flex-col justify-start p-6">
+                    <p className="text-blue-700 text-sm font-bold uppercase pb-4">
+                      {item.categoryName}
+                    </p>
+                    <p className="text-3xl font-bold hover:text-gray-700 pb-4">
+                      {item.title}
+                    </p>
+                    <p className="pb-6">{item.previewText}</p>
+                    <p className="text-sm pb-3">
+                      By{" "}
+                      <a href="#" className="font-semibold hover:text-gray-800">
+                        David Grzyb
+                      </a>
+                      , Published on {item.modifiedDate}
+                    </p>
+                    <div className="flex">
+                      <div>viewCount: {item.viewCount}</div>
+                      <div>replyCount: {item.replyCount}</div>
+                    </div>
+                  </div>
+                </article>
+              </Link>
+            );
+          })}
+
           {/* Pagination */}
           <div className="flex items-center py-8">
             <a

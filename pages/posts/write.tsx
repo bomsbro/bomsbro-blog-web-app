@@ -1,13 +1,11 @@
 import React from "react";
 import BlogPagesLayout from "src/common/templates/BlogPagesLayout";
-import BlogPostView from "src/apps/posts/views/BlogPostView";
-import { useRouter } from "next/router";
+import BlogPostWriteView from "@posts/views/BlogPostWriteView";
 
 const PostDetailPage = () => {
-  const router = useRouter();
   return (
     <BlogPagesLayout>
-      <BlogPostView postId={parseInt(router.query.postId as string, 10)} />
+      <BlogPostWriteView />
     </BlogPagesLayout>
   );
 };

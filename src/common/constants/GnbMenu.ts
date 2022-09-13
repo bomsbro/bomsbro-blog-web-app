@@ -15,11 +15,6 @@ const gnbMenu = [
     path: "/projects",
   },
   {
-    key: "technology",
-    name: "technology",
-    path: "/technology",
-  },
-  {
     key: "posts",
     name: "posts",
     path: "/posts",
