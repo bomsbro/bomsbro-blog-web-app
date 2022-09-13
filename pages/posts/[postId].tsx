@@ -7,7 +7,7 @@ const PostDetailPage = () => {
   const router = useRouter();
   return (
     <BlogPagesLayout>
-      <BlogPostView postCategory={router.query} />
+      <BlogPostView postId={parseInt(router.query.postId as string, 10)} />
     </BlogPagesLayout>
   );
 };

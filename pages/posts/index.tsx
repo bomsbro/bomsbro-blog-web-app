@@ -6,10 +6,12 @@ import { useRouter } from "next/router";
 
 const BlogBoardPage: NextPage = () => {
   const router = useRouter();
-  console.log(router.query.postCategory);
+
   return (
     <BlogPagesLayout>
-      <BlogPostListView postCategory={router.query.postCategory} />
+      <BlogPostListView
+        postCategory={parseInt(router.query.postCategory as string, 10)}
+      />
     </BlogPagesLayout>
   );
 };

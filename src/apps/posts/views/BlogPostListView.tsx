@@ -86,47 +86,37 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
           {/* Post Item */}
           {postList?.data.data.map((item: any) => {
             return (
-              <article
-                key={item.id}
-                className="w-full flex flex-col shadow my-4"
-              >
-                {/* Article Image */}
-                <a href="#" className="hover:opacity-75">
+              <Link key={item.id} href={`/posts/${item.id}`}>
+                <article className="w-full flex flex-col shadow my-4">
+                  {/* Article Image */}
+
                   <img
                     src="https://source.unsplash.com/random/1000x500?sig=1"
                     alt=""
                   />
-                </a>
-                <div className="bg-white flex flex-col justify-start p-6">
-                  <a
-                    href="#"
-                    className="text-blue-700 text-sm font-bold uppercase pb-4"
-                  >
-                    {item.categoryName}
-                  </a>
-                  <a
-                    href="#"
-                    className="text-3xl font-bold hover:text-gray-700 pb-4"
-                  >
-                    {item.title}
-                  </a>
 
-                  <a href="#" className="pb-6">
-                    {item.previewText}
-                  </a>
-                  <p className="text-sm pb-3">
-                    By{" "}
-                    <a href="#" className="font-semibold hover:text-gray-800">
-                      David Grzyb
-                    </a>
-                    , Published on {item.modifiedDate}
-                  </p>
-                  <div className="flex">
-                    <div>viewCount: {item.viewCount}</div>
-                    <div>replyCount: {item.replyCount}</div>
+                  <div className="bg-white flex flex-col justify-start p-6">
+                    <p className="text-blue-700 text-sm font-bold uppercase pb-4">
+                      {item.categoryName}
+                    </p>
+                    <p className="text-3xl font-bold hover:text-gray-700 pb-4">
+                      {item.title}
+                    </p>
+                    <p className="pb-6">{item.previewText}</p>
+                    <p className="text-sm pb-3">
+                      By{" "}
+                      <a href="#" className="font-semibold hover:text-gray-800">
+                        David Grzyb
+                      </a>
+                      , Published on {item.modifiedDate}
+                    </p>
+                    <div className="flex">
+                      <div>viewCount: {item.viewCount}</div>
+                      <div>replyCount: {item.replyCount}</div>
+                    </div>
                   </div>
-                </div>
-              </article>
+                </article>
+              </Link>
             );
           })}
 
