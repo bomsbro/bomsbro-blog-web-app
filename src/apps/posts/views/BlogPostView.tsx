@@ -29,7 +29,7 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
         {/* Article Image */}
         <a href="#" className="hover:opacity-75">
           <img
-            src="https://source.unsplash.com/collection/1346951/1000x500?sig=1"
+            src="https://source.unsplash.com/collection/1346951/1280x500?sig=1"
             alt=""
           />
         </a>
@@ -54,6 +54,12 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
             , Published on April 25th, 2020
           </p>
           {/* Contents */}
+          <div
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={{
+              __html: post?.data.data.content,
+            }}
+          />
         </div>
       </article>
 

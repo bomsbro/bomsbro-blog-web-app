@@ -1,28 +1,30 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useQuery } from "react-query";
 
 interface BlogPostListViewProps {
-  postCategory: number;
+  postCategoryId: number;
 }
 
 const BlogPostListView: React.FC<BlogPostListViewProps> = ({
-  postCategory,
+  postCategoryId,
 }) => {
   const fetchPostCategoryList = async () => {
-    return axios.get(`https://bomsbro.com/api/post-categories/`);
+    return axios.get(`https://bomsbro.com/api/post-categories`);
   };
 
   const fetchPostList = async () => {
-    return axios.get(
-      `https://bomsbro.com/api/post-categories/${postCategory}/posts`
-    );
+    if (postCategoryId || postCategoryId === 0)
+      return axios.get(
+        `https://bomsbro.com/api/post-categories/${postCategoryId}/posts?page=1&size=5`
+      );
+    return axios.get(`https://bomsbro.com/api/posts?page=1&size=5`);
   };
 
   const { data: postList, error: postListError } = useQuery(
-    ["post-list", postCategory],
+    ["post-list", postCategoryId],
     fetchPostList,
     {
       onSuccess: async (res) => {
@@ -43,6 +45,13 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
     }
   );
 
+  const currentCategory = useCallback(() => {
+    const filteredCategory = categoryList?.data.data.filter((item: any) => {
+      return item.categoryId === postCategoryId;
+    });
+    return filteredCategory;
+  }, [postCategoryId, categoryList]);
+
   return (
     <>
       {/* Content Area */}
@@ -62,15 +71,26 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
           {/* Web Menu SideBar */}
           <div className="hidden md:flex w-full bg-white shadow flex-col my-4 p-6">
             <p className="text-xl font-semibold pb-5">카테고리</p>
+            <Link href="/posts">
+              <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                전체 게시글
+              </li>
+            </Link>
             {categoryList?.data.data.map((item: any) => {
+              if (item.id === 0) return null; // 미분류 게시판은 순서가 맨 밑에 있어야 함
               return (
-                <Link key={item.id} href={`/posts?postCategory=${item.id}`}>
+                <Link key={item.id} href={`/posts?postCategoryId=${item.id}`}>
                   <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                     {item.name}
                   </li>
                 </Link>
               );
             })}
+            <Link href={`/posts?postCategoryId=${0}`}>
+              <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                미분류
+              </li>
+            </Link>
           </div>
           <Link href="/posts/write">
             <button
@@ -83,6 +103,10 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
         </aside>
         {/* Posts Section */}
         <section className="w-full md:w-2/3 flex flex-col items-center px-3">
+          {/* Posts Section Header */}
+          <div className="w-full flex flex-col shadow my-4">
+            <h1>하이{currentCategory.name}</h1>
+          </div>
           {/* Post Item */}
           {postList?.data.data.map((item: any) => {
             return (

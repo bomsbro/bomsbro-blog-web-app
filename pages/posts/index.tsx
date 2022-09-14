@@ -10,7 +10,7 @@ const BlogBoardPage: NextPage = () => {
   return (
     <BlogPagesLayout>
       <BlogPostListView
-        postCategory={parseInt(router.query.postCategory as string, 10)}
+        postCategoryId={parseInt(router.query.postCategoryId as string, 10)}
       />
     </BlogPagesLayout>
   );
