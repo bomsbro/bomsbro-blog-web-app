@@ -37,13 +37,9 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
       >
         <aside className="fixed h-full top-0 left-0 w-64 bg-white overflow-auto ease-in-out transform transition-all duration-300 z-50 rounded-tr-3xl">
           <span className="flex w-full items-center p-4 border-b">
-            <img
-              src="/logos/fox-hub.png"
-              alt="Logo"
-              className="h-auto w-32 mx-auto"
-            />
+            <img src="/logos/fox-hub.png" alt="Logo" className="h-auto w-32 mx-auto" />
           </span>
-          {gnbMenu.map((item) => {
+          {gnbMenu.map(item => {
             return (
               <a key={item.key} href={item.path}>
                 <span className="flex items-center p-4 hover:bg-indigo-500 hover:text-white ">
@@ -67,10 +63,7 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
           })}
 
           <div className="fixed bottom-0 w-full">
-            <button
-              type="button"
-              className="flex items-center p-4 text-white bg-blue-500 hover:bg-blue-600 w-full"
-            >
+            <button type="button" className="flex items-center p-4 text-white bg-blue-500 hover:bg-blue-600 w-full">
               <svg
                 fill="none"
                 strokeLinecap="round"
@@ -90,17 +83,11 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
               href="https://www.buymeacoffee.com/fayazahmed"
               target="_blank"
             >
-              <img
-                className="mr-2 h-8 w-auto"
-                src="/sidebar/bmc.svg"
-                alt="Buy Me Coffee"
-              />
+              <img className="mr-2 h-8 w-auto" src="/sidebar/bmc.svg" alt="Buy Me Coffee" />
               <p>
                 <span className="font-bold">Buy me a Coffee</span>
                 <br />
-                <span className="text-sm text-white">
-                  Help me keep this site alive
-                </span>
+                <span className="text-sm text-white">Help me keep this site alive</span>
               </p>
             </a>
           </div>

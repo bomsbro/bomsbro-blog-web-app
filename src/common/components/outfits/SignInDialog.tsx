@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 interface SignInDialog {
   handleClose(): Promise<void>;
 }
 
 const SignInDialog: React.FC<SignInDialog> = ({ handleClose }) => {
+  const [signInData, setSignInData] = useState({
+    email: "",
+    password: "",
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data: any) => {
+    setSignInData(data);
+  };
+
   return (
     <>
       {/* BackDrop */}
@@ -16,7 +31,7 @@ const SignInDialog: React.FC<SignInDialog> = ({ handleClose }) => {
       />
 
       {/* Contents */}
-      <div className="fixed inset-0 w-full p-8 z-50 md:mx-auto md:w-1/2 lg:w-1/3  ">
+      <div className="fixed inset-0 w-full p-8 z-50 md:mx-auto md:w-1/2 xl:w-1/3  ">
         <div className="shadow-lg bg-white rounded-lg p-8">
           <div className="flex justify-end mb-6">
             <button type="button" onClick={handleClose}>
@@ -27,41 +42,41 @@ const SignInDialog: React.FC<SignInDialog> = ({ handleClose }) => {
             </button>
           </div>
 
-          <h1 className="text-center text-2xl text-green-dark">Login</h1>
+          <h1 className="text-center text-2xl text-green-dark">Sign in to Blog</h1>
 
-          <form className="pt-6 pb-2 my-2">
+          <form className="pt-6 pb-2 my-2" onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-4">
               <label className="block text-sm font-bold mb-2" htmlFor="email">
+                Email Address
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
                   id="email"
-                  type="text"
+                  type="email"
                   placeholder="Email Address"
+                  {...register("email", { required: true })}
                 />
-                Email Address
               </label>
+              {errors.email && <span className="text-xs text-red-500">This field is required</span>}
             </div>
             <div className="mb-6">
-              <label
-                className="block text-sm font-bold mb-2"
-                htmlFor="password"
-              >
+              <label className="block text-sm font-bold mb-2" htmlFor="password">
+                Password
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3"
-                  id="password"
                   type="password"
                   placeholder="Password"
+                  {...register("password", { required: true })}
                 />
-                Password
               </label>
+              {errors.password && <span className="text-xs text-red-500">This field is required</span>}
             </div>
             <div className="block md:flex items-center justify-between">
               <div>
                 <button
-                  className="bg-green hover:bg-green-dark text-white font-bold py-2 px-4 rounded border-b-4 border-green-darkest"
-                  type="button"
+                  className="bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded border border-green-600"
+                  type="submit"
                 >
-                  Sign In
+                  Sign in
                 </button>
               </div>
 
