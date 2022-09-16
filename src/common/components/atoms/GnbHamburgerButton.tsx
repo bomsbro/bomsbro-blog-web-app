@@ -7,10 +7,7 @@ interface GnbHamburgerButtonProps {
   onClick(): void;
 }
 
-const GnbHamburgerButton: React.FC<GnbHamburgerButtonProps> = ({
-  isOpened,
-  onClick,
-}) => {
+const GnbHamburgerButton: React.FC<GnbHamburgerButtonProps> = ({ isOpened, onClick }) => {
   const lottieIcon: MutableRefObject<any> = useRef();
 
   useEffect(() => {

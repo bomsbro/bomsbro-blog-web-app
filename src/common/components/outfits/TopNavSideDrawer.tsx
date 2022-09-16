@@ -63,7 +63,10 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
           })}
 
           <div className="fixed bottom-0 w-full">
-            <button type="button" className="flex items-center p-4 text-white bg-blue-500 hover:bg-blue-600 w-full">
+            <button
+              type="button"
+              className="flex items-center p-4 text-white bg-blue-500 hover:bg-blue-600 w-full"
+            >
               <svg
                 fill="none"
                 strokeLinecap="round"
