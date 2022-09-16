@@ -11,16 +11,12 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
     return axios.get(`https://bomsbro.com/api/posts/${postId}`);
   };
 
-  const { data: post, error: postError } = useQuery(
-    ["post", postId],
-    fetchPost,
-    {
-      onSuccess: async (res) => {
-        // 성공시 호출
-        console.log(res);
-      },
-    }
-  );
+  const { data: post, error: postError } = useQuery(["post", postId], fetchPost, {
+    onSuccess: async res => {
+      // 성공시 호출
+      console.log(res);
+    },
+  });
   return (
     <div className="w-full flex flex-wrap py-6">
       {/* Post Section */}
@@ -38,10 +34,7 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
         </a>
         <div className="bg-white flex flex-col justify-start p-6">
           {/* Post Category */}
-          <a
-            href="#"
-            className="text-blue-700 text-sm font-bold uppercase pb-4"
-          >
+          <a href="#" className="text-blue-700 text-sm font-bold uppercase pb-4">
             Technology
           </a>
           {/* Post Title */}
@@ -67,19 +60,13 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
       </article>
 
       <div className="w-full flex pt-6">
-        <a
-          href="#"
-          className="w-1/2 bg-white shadow hover:shadow-md text-left p-6"
-        >
+        <a href="#" className="w-1/2 bg-white shadow hover:shadow-md text-left p-6">
           <p className="text-lg text-blue-800 font-bold flex items-center">
             <i className="fas fa-arrow-left pr-1" /> Previous
           </p>
           <p className="pt-2">Lorem Ipsum Dolor Sit Amet Dolor Sit Amet</p>
         </a>
-        <a
-          href="#"
-          className="w-1/2 bg-white shadow hover:shadow-md text-right p-6"
-        >
+        <a href="#" className="w-1/2 bg-white shadow hover:shadow-md text-right p-6">
           <p className="text-lg text-blue-800 font-bold flex items-center justify-end">
             Next <i className="fas fa-arrow-right pl-1" />
           </p>
@@ -100,8 +87,8 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
         <div className="flex-1 flex flex-col justify-center md:justify-start">
           <p className="font-semibold text-2xl">David</p>
           <p className="pt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            vel neque non libero suscipit suscipit eu eu urna.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel neque non libero
+            suscipit suscipit eu eu urna.
           </p>
           <div className="flex items-center justify-center md:justify-start text-2xl no-underline text-blue-800 pt-4">
             <a className="" href="#">

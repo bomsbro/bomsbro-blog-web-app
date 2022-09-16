@@ -68,7 +68,9 @@ const SignInDialog: React.FC<SignInDialog> = ({ handleClose }) => {
                   {...register("password", { required: true })}
                 />
               </label>
-              {errors.password && <span className="text-xs text-red-500">This field is required</span>}
+              {errors.password && (
+                <span className="text-xs text-red-500">This field is required</span>
+              )}
             </div>
             <div className="block md:flex items-center justify-between">
               <div>

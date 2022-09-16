@@ -1,4 +1,6 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
+import postCategoryRepository from "@posts/modules/repository/postCategoryRepository";
+import postRepository from "@posts/modules/repository/postRepository";
 import axios from "axios";
 import Link from "next/link";
 import React, { useCallback, useEffect } from "react";
@@ -9,45 +11,49 @@ interface BlogPostListViewProps {
   postCategoryId: number;
 }
 
-const BlogPostListView: React.FC<BlogPostListViewProps> = ({
-  postCategoryId,
-}) => {
+const BlogPostListView: React.FC<BlogPostListViewProps> = ({ postCategoryId }) => {
   const fetchPostCategoryList = async () => {
-    return axios.get(`https://bomsbro.com/api/post-categories`);
+    const res = await postCategoryRepository.getPostCategoryList();
+    console.log(res);
+    return res;
   };
 
   const fetchPostList = async () => {
+    let res;
     if (postCategoryId || postCategoryId === 0)
-      return axios.get(
-        `https://bomsbro.com/api/post-categories/${postCategoryId}/posts?page=1&size=5`
-      );
-    return axios.get(`https://bomsbro.com/api/posts?page=1&size=5`);
+      res = await postRepository.getPostList(postCategoryId);
+    res = await postRepository.getAllPostList();
+
+    console.log(res);
+
+    return res;
   };
 
   const { data: postList, error: postListError } = useQuery(
     ["post-list", postCategoryId],
     fetchPostList,
     {
-      onSuccess: async (res) => {
+      onSuccess: async res => {
         // 성공시 호출
         console.log(res);
       },
-    }
+    },
   );
 
   const { data: categoryList, error: categoryListError } = useQuery(
     "post-categories",
     fetchPostCategoryList,
     {
-      onSuccess: async (res) => {
+      onSuccess: async res => {
         // 성공시 호출
         console.log(res);
       },
-    }
+    },
   );
 
+  // change to useMemo
   const currentCategory = useCallback(() => {
-    const filteredCategory = categoryList?.data.data.filter((item: any) => {
+    const filteredCategory = categoryList?.filter((item: any) => {
       console.log(item.id);
       return item.id === postCategoryId;
     });
@@ -63,10 +69,7 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
           {/* Mobile MenuBar */}
           <div className="w-full md:hidden pt-1 pb-2 container mx-auto flex flex-wrap items-center justify-between">
             <div className="flex items-center">
-              <MenuAlt2Icon
-                className="w-7 h-7 ml-1 mr-4"
-                onClick={() => console.log("하이")}
-              />
+              <MenuAlt2Icon className="w-7 h-7 ml-1 mr-4" onClick={() => console.log("하이")} />
               <p>Post Categories</p>
             </div>
           </div>
@@ -78,7 +81,7 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
                 전체 게시글
               </li>
             </Link>
-            {categoryList?.data.data.map((item: any) => {
+            {categoryList?.map((item: any) => {
               if (item.id === 0) return null; // 미분류 게시판은 순서가 맨 밑에 있어야 함
               return (
                 <Link key={item.id} href={`/posts?postCategoryId=${item.id}`}>
@@ -110,7 +113,7 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
             <h1>하이{currentCategory.name}</h1>
           </div>
           {/* Post Item */}
-          {postList?.data.data.map((item: any) => {
+          {postList?.map((item: any) => {
             return (
               <Link key={item.id} href={`/posts/${item.id}`}>
                 <article className="w-full flex flex-col shadow my-4">
@@ -127,9 +130,7 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
                     <p className="text-blue-700 text-sm font-bold uppercase pb-4">
                       {item.postCategoryName}
                     </p>
-                    <p className="text-3xl font-bold hover:text-gray-700 pb-4">
-                      {item.title}
-                    </p>
+                    <p className="text-3xl font-bold hover:text-gray-700 pb-4">{item.title}</p>
                     <p className="pb-6">{item.previewText}</p>
                     <p className="text-sm pb-3">
                       By{" "}

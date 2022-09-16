@@ -14,9 +14,7 @@ const AuthorCard: React.FC = () => {
             className="shadow-xl md:h-60 md:w-60 h-40 w-40 rounded-full"
           />
           <div className="mb-2 mx-7 mt-4 justify-center items-center">
-            <h1 className="md:text-3xl text-2xl text-gray-800 font-bold">
-              작성자
-            </h1>
+            <h1 className="md:text-3xl text-2xl text-gray-800 font-bold">작성자</h1>
             <div className="md:text-lg text-gray-600">포지션</div>
             <a href="#" className="text-gray-600 md:hidden mt-1">
               이메일
@@ -46,12 +44,9 @@ const AuthorCard: React.FC = () => {
 const AuthorIntro: React.FC = () => {
   return (
     <div className="mb-6">
-      <h2 className="mt-6 text-4xl text-gray-700 font-bold capitalize">
-        👋 Hola , Good Day !
-      </h2>
+      <h2 className="mt-6 text-4xl text-gray-700 font-bold capitalize">👋 Hola , Good Day !</h2>
       <p className="mt-8 mb-4 text-justify">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry.
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
       </p>
     </div>
   );
@@ -61,9 +56,7 @@ const Expertise: React.FC = () => {
   return (
     <div className="mt-8">
       <div className="mt-2">
-        <h2 className="mb-2 text-xl text-gray-700 font-bold capitalize">
-          Frontend
-        </h2>
+        <h2 className="mb-2 text-xl text-gray-700 font-bold capitalize">Frontend</h2>
 
         <ul className="flex flex-wrap gap-4 items-center">
           {/* skill icons
@@ -91,16 +84,10 @@ const Expertise: React.FC = () => {
         </ul>
       </div>
       <div className="mt-4">
-        <h2 className="mb-2 text-xl text-gray-700 font-bold capitalize">
-          Backend
-        </h2>
+        <h2 className="mb-2 text-xl text-gray-700 font-bold capitalize">Backend</h2>
         <ul className="mb-6 flex flex-wrap gap-4">
-          <li className="flex items-center">
-            {/* <Laravel className="h-10 w-10"></Laravel> */}
-          </li>
-          <li className="flex items-center">
-            {/* <Node className="h-10 w-10"></Node> */}
-          </li>
+          <li className="flex items-center">{/* <Laravel className="h-10 w-10"></Laravel> */}</li>
+          <li className="flex items-center">{/* <Node className="h-10 w-10"></Node> */}</li>
         </ul>
       </div>
     </div>
@@ -129,8 +116,8 @@ const TimeLine: React.FC = () => {
             2018-Currently
           </time>
           <p className="mb-4 text-base font-normal text-gray-500">
-            Get access to over 20+ pages including a dashboard layout, charts,
-            kanban board, calendar, and pre-order E-commerce & Marketing pages.
+            Get access to over 20+ pages including a dashboard layout, charts, kanban board,
+            calendar, and pre-order E-commerce & Marketing pages.
           </p>
         </li>
         <li className="mb-10 ml-6">
@@ -141,16 +128,13 @@ const TimeLine: React.FC = () => {
               alt=""
             />
           </span>
-          <h3 className="mb-1 text-lg font-semibold text-gray-900">
-            Freelancer
-          </h3>
+          <h3 className="mb-1 text-lg font-semibold text-gray-900">Freelancer</h3>
           <time className="block mb-2 text-sm font-normal leading-none text-gray-400">
             Released on December 7th, 2021
           </time>
           <p className="text-base font-normal text-gray-500">
-            All of the pages and components are first designed in Figma and we
-            keep a parity between the two versions even as we update the
-            project.
+            All of the pages and components are first designed in Figma and we keep a parity between
+            the two versions even as we update the project.
           </p>
         </li>
         <li className="mb-10 ml-6">
@@ -161,15 +145,12 @@ const TimeLine: React.FC = () => {
               alt=""
             />
           </span>
-          <h3 className="mb-1 text-lg font-semibold text-gray-900">
-            2013 - Dhaka University
-          </h3>
+          <h3 className="mb-1 text-lg font-semibold text-gray-900">2013 - Dhaka University</h3>
           <time className="block mb-2 text-sm font-normal leading-none text-gray-400">
             2013 - 2018
           </time>
           <p className="text-base font-normal text-gray-500">
-            Studied &quot;BSC in Computer Science and Engineering&quot; in Dhaka
-            University.
+            Studied &quot;BSC in Computer Science and Engineering&quot; in Dhaka University.
           </p>
         </li>
         <li className="mb-10 ml-6">
@@ -180,9 +161,7 @@ const TimeLine: React.FC = () => {
               alt=""
             />
           </span>
-          <h3 className="mb-1 text-lg font-semibold text-gray-900">
-            Born in 1996, July 27
-          </h3>
+          <h3 className="mb-1 text-lg font-semibold text-gray-900">Born in 1996, July 27</h3>
           <time className="block mb-2 text-sm font-normal leading-none text-gray-400">
             Dhaka Bangladesh
           </time>
