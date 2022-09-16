@@ -24,6 +24,8 @@ const ProjectCard: React.FC<any> = ({ project }) => {
                 <div className="mx-1">
                   <span className="sr-only" />
                   <img
+                    width={36}
+                    height={36}
                     className="w-9 h-9"
                     src=" https://simpleicons.org/icons/git.svg"
                     alt=""

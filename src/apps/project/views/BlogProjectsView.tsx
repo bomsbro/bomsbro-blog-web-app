@@ -43,6 +43,8 @@ const BlogProjectsView: React.FC = () => {
             >
               <span className="sr-only" />
               <img
+                width={64}
+                height={64}
                 className="w-16 h-16 md:w-20 md:h-20"
                 src="https://simpleicons.org/icons/github.svg"
                 alt=""
