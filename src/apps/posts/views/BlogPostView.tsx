@@ -29,8 +29,11 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
         {/* Article Image */}
         <a href="#" className="hover:opacity-75">
           <img
+            width={1280}
+            height={500}
+            loading="lazy"
             src="https://source.unsplash.com/collection/1346951/1280x500?sig=1"
-            alt=""
+            alt="로딩중"
           />
         </a>
         <div className="bg-white flex flex-col justify-start p-6">
@@ -87,6 +90,8 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
       <div className="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
         <div className="w-full md:w-1/5 flex justify-center md:justify-start pb-4">
           <img
+            width={150}
+            height={150}
             src="https://source.unsplash.com/collection/1346951/150x150?sig=1"
             className="rounded-full shadow h-32 w-32"
             alt=""

@@ -34,22 +34,30 @@ jobs:
           ${{secrets.REMOTE_PASSWORD}}
           'bomsbro-blog-web-app_nextjs'
 
-      # CLEAN UP IMAGES ON INSTACE
+       # CLEAN UP IMAGES ON INSTANCE
       - name: Prune Images
-        run:  sshpass -p $REMOTE_PASSWORD ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST -o StrictHostKeyChecking=no 'docker image prune'
+        run: |
+          sudo apt-get install expect
+          expect -c "
+          set timeout 5
+          spawn sshpass -p \"${secrets.REMOTE_PASSWORD}\" ssh -p \"${secrets.REMOTE_SSH_PORT}\" \"${secrets.REMOTE_USERNAME@$REMOTE_HOST}\" -o StrictHostKeyChecking=no \'docker image prune\'
+          expect -nocase \"\[y/N\]\"
+          send \"y\"
+          exit 0
+          "
 
       # SING IN DOCKER HUB
-      - name: Sign in
-        uses: docker/login-action@v1
-        with:
-          username: ${{secrets.DOCKERHUB_USERNAME}}
-          password: ${{secrets.DOCKERHUB_PASSWORD}}
+      #- name: Sign in
+      #  uses: docker/login-action@v1
+      #  with:
+      #    username: ${{secrets.DOCKERHUB_USERNAME}}
+      #    password: ${{secrets.DOCKERHUB_PASSWORD}}
           
       # BACK UP IMAGE ON DOCKER HUB REPOSITORY
-      - name: Release images
-        env:
-          NAME: bomsbro # 계정 명
-          REPO: bomsbro-blog-web-app # 레포 이름
-        run: 
-          docker tag $REPO:latest $NAME/$REPO:latest
-          docker push $NAME/$REPO:latest      
+      #- name: Release images
+      #  env:
+      #    NAME: ${{secrets.DOCKERHUB_USERNAME}}
+      #    REPO: ${{secrets.DOCKERHUB_PASSWORD}}
+      #  run:
+      #    docker tag $REPO:latest $NAME/$REPO:latest
+      #    docker push $NAME/$REPO:latest     

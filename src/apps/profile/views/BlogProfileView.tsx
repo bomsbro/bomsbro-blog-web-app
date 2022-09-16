@@ -6,6 +6,8 @@ const AuthorCard: React.FC = () => {
       <div>
         <div className="md:block flex justify-center items-center">
           <img
+            width={1280}
+            height={500}
             src="siteMetadata.author_image"
             loading="lazy"
             alt="me"

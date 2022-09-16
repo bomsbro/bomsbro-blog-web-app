@@ -3,6 +3,7 @@ import axios from "axios";
 import Link from "next/link";
 import React, { useCallback, useEffect } from "react";
 import { useQuery } from "react-query";
+import getTimeDiffString from "src/common/utils/blogUtils";
 
 interface BlogPostListViewProps {
   postCategoryId: number;
@@ -47,7 +48,8 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
 
   const currentCategory = useCallback(() => {
     const filteredCategory = categoryList?.data.data.filter((item: any) => {
-      return item.categoryId === postCategoryId;
+      console.log(item.id);
+      return item.id === postCategoryId;
     });
     return filteredCategory;
   }, [postCategoryId, categoryList]);
@@ -115,13 +117,15 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
                   {/* Article Image */}
 
                   <img
+                    width={1000}
+                    height={500}
                     src="https://source.unsplash.com/random/1000x500?sig=1"
                     alt=""
                   />
 
                   <div className="bg-white flex flex-col justify-start p-6">
                     <p className="text-blue-700 text-sm font-bold uppercase pb-4">
-                      {item.categoryName}
+                      {item.postCategoryName}
                     </p>
                     <p className="text-3xl font-bold hover:text-gray-700 pb-4">
                       {item.title}
@@ -130,9 +134,9 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({
                     <p className="text-sm pb-3">
                       By{" "}
                       <a href="#" className="font-semibold hover:text-gray-800">
-                        David Grzyb
+                        {item.writerName}
                       </a>
-                      , Published on {item.modifiedDate}
+                      , {getTimeDiffString(item.modifiedDate)}
                     </p>
                     <div className="flex">
                       <div>viewCount: {item.viewCount}</div>
