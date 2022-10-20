@@ -8,16 +8,12 @@ const BlogProjectsView: React.FC = () => {
     return axios.get("https://api.github.com/users/bomsbro/repos");
   };
 
-  const { isLoading, isError, data, error } = useQuery(
-    "projects",
-    fetchProjectList,
-    {
-      onSuccess: async (res) => {
-        // 성공시 호출
-        console.log(res);
-      },
-    }
-  );
+  const { isLoading, isError, data, error } = useQuery("projects", fetchProjectList, {
+    onSuccess: async res => {
+      // 성공시 호출
+      console.log(res);
+    },
+  });
 
   return (
     <>

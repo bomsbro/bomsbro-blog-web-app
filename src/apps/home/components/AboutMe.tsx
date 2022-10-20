@@ -5,8 +5,8 @@ const AboutMe = () => {
     <div className="w-full bg-white shadow flex flex-col my-4 p-6">
       <p className="text-xl font-semibold pb-5">About Me</p>
       <p className="pb-2">
-        passinate web programmer. main stack is Front-end. instrested in Backend
-        &amp; DevOps too. I Always Think about well-made system.
+        passinate web programmer. main stack is Front-end. instrested in Backend &amp; DevOps too. I
+        Always Think about well-made system.
       </p>
       <a
         href="#"
