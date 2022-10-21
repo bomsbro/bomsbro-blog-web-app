@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 interface SignInDialog {
+  open: boolean;
   handleClose(): Promise<void>;
 }
 
-const SignInDialog: React.FC<SignInDialog> = ({ handleClose }) => {
+const SignInDialog: React.FC<SignInDialog> = ({ open, handleClose }) => {
   const [signInData, setSignInData] = useState({
     email: "",
     password: "",

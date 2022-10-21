@@ -37,6 +37,23 @@ class BlogAPI {
     return body.data;
   }
 
+  public async put<ReqT, ResT, QueryT = undefined>(
+    url: string,
+    payload?: ReqT,
+    query?: QueryT,
+  ): Promise<ResT> {
+    const response = await axios.put(
+      this.PREFIX + url,
+      payload,
+      query && {
+        params: query,
+        paramsSerializer: params => qs.stringify(params),
+      },
+    );
+    const body: CommonResponse<ResT> = response.data;
+    return body.data;
+  }
+
   public async delete<ResT, QueryT = undefined>(url: string, query?: QueryT) {
     const response = await axios.delete(
       this.PREFIX + url,
