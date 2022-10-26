@@ -58,7 +58,9 @@
     "validate-commit-msg": "2.14.0"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": []
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint ./src --fix"
+    ]
   },
   "commitlint": {
     "extends": [
