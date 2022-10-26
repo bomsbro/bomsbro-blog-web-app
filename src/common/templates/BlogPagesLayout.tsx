@@ -64,7 +64,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
       </header>
 
       {/* <!-- Menu Nav Web--> */}
-      <nav className="w-full py-4 border-t border-b bg-gray-100">
+      <nav className="w-full sticky top-14 sm:relative sm:top-0 py-4 border-t border-b bg-gray-100">
         <div className="w-full flex-grow hidden sm:flex sm:items-center sm:w-auto">
           <div className="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
             {gnbMenu.map(menu => {

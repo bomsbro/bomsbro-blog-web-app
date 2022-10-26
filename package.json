@@ -3,17 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "env-cmd -f .env/.env.dev next dev",
+    "dev:prod": "env-cmd -f .env/.env.prod next dev",
+    "build": "env-cmd -f .env/.env.prod next build",
     "start": "next start",
     "lint": "next lint",
+    "prepare": "husky install",
     "format": "prettier --write \"{,!(node_modules)/**/}*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
     "@heroicons/react": "1.0.6",
     "@tinymce/tinymce-react": "4.2.0",
+    "@types/lodash": "4.14.186",
+    "@types/react-window": "1.8.5",
     "axios": "0.27.2",
+    "env-cmd": "10.1.0",
     "global": "4.4.0",
+    "lodash": "4.17.21",
     "lottie-web": "5.9.6",
     "moment": "2.29.4",
     "next": "12.2.0",
@@ -22,9 +28,11 @@
     "react-device-detect": "2.2.2",
     "react-dom": "18.2.0",
     "react-hook-form": "7.35.0",
-    "react-query": "3.39.1"
+    "react-query": "3.39.1",
+    "react-window": "1.8.7"
   },
   "devDependencies": {
+    "@commitlint/cli": "17.1.2",
     "@types/moment": "2.13.0",
     "@types/node": "18.0.1",
     "@types/qs": "6.9.7",
@@ -33,12 +41,14 @@
     "@typescript-eslint/eslint-plugin": "5.30.5",
     "@typescript-eslint/parser": "5.30.5",
     "autoprefixer": "10.4.7",
+    "commitlint-config-gitmoji": "2.2.6",
     "eslint": "8.19.0",
     "eslint-config-airbnb": "19.0.4",
     "eslint-config-next": "12.2.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-import-resolver-typescript": "3.5.0",
     "eslint-plugin-prettier": "4.2.1",
+    "husky": "8.0.1",
     "lint-staged": "13.0.3",
     "postcss": "8.4.14",
     "prettier": "2.7.1",
@@ -47,42 +57,12 @@
     "typescript": "4.7.4",
     "validate-commit-msg": "2.14.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "validate-commit-msg"
-    }
-  },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --ext .jsx --ext .js --ext .tsx --ext .ts src/ --fix"
-    ]
+    "src/**/*.{js,jsx,ts,tsx}": []
   },
-  "config": {
-    "validate-commit-msg": {
-      "types": [
-        "init",
-        "feat",
-        "fix",
-        "docs",
-        "style",
-        "refactor",
-        "build",
-        "chore",
-        "revert"
-      ],
-      "scope": {
-        "required": false,
-        "allowed": [
-          "*"
-        ],
-        "validate": false,
-        "multiple": false
-      },
-      "warnOnFail": false,
-      "maxSubjectLength": 100,
-      "helpMessage": "커밋 메세지 형식 어긋남",
-      "autoFix": false
-    }
+  "commitlint": {
+    "extends": [
+      "gitmoji"
+    ]
   }
 }

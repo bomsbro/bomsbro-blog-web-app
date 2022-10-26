@@ -1,7 +1,6 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 import postCategoryRepository from "@posts/modules/repository/postCategoryRepository";
 import postRepository from "@posts/modules/repository/postRepository";
-import axios from "axios";
 import Link from "next/link";
 import React, { useCallback, useEffect } from "react";
 import { useQuery } from "react-query";
@@ -12,26 +11,18 @@ interface BlogPostListViewProps {
 }
 
 const BlogPostListView: React.FC<BlogPostListViewProps> = ({ postCategoryId }) => {
-  const fetchPostCategoryList = async () => {
-    const res = await postCategoryRepository.getPostCategoryList();
-    console.log(res);
-    return res;
-  };
-
-  const fetchPostList = async () => {
-    let res;
-    if (postCategoryId || postCategoryId === 0)
-      res = await postRepository.getPostList(postCategoryId);
-    res = await postRepository.getAllPostList();
-
-    console.log(res);
-
-    return res;
-  };
-
-  const { data: postList, error: postListError } = useQuery(
+  const { data: postList, error: postListError } = useQuery<any, any, any>(
     ["post-list", postCategoryId],
-    fetchPostList,
+    async () => {
+      let res;
+      if (postCategoryId || postCategoryId === 0)
+        res = await postRepository.getPostList(postCategoryId);
+      res = await postRepository.getAllPostList();
+
+      console.log(res);
+
+      return res;
+    },
     {
       onSuccess: async res => {
         // 성공시 호출
@@ -40,9 +31,13 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({ postCategoryId }) =
     },
   );
 
-  const { data: categoryList, error: categoryListError } = useQuery(
+  const { data: categoryList, error: categoryListError } = useQuery<any, any, any>(
     "post-categories",
-    fetchPostCategoryList,
+    async () => {
+      const res = await postCategoryRepository.getPostCategoryList();
+      console.log(res);
+      return res;
+    },
     {
       onSuccess: async res => {
         // 성공시 호출

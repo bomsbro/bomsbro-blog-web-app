@@ -1,5 +1,6 @@
 import gnbMenu from "@common/constants/GnbMenu";
 import React from "react";
+import ModalPortal from "./ModalPortal";
 
 interface TopNavSideDrawerProps {
   handleClose(): Promise<void>;
@@ -7,7 +8,7 @@ interface TopNavSideDrawerProps {
 
 const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
   return (
-    <>
+    <ModalPortal>
       {/*
         <transition
           enter-className="opacity-0"
@@ -96,7 +97,7 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
           </div>
         </aside>
       </div>
-    </>
+    </ModalPortal>
   );
 };
 
