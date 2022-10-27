@@ -33,15 +33,9 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
       {/* <!-- Top Bar Nav --> */}
       <nav className="fixed w-full z-20 h-14 sm:relative py-4 bg-blue-800 shadow">
         <nav className="container max-w-screen-xl w-full mx-auto flex flex-wrap items-center justify-between">
-          <ul className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
-            <li>
-              <Link href="/blog/home">
-                <a className="hover:text-gray-200 hover:underline px-4" href="blog/home">
-                  Blog
-                </a>
-              </Link>
-            </li>
-          </ul>
+          <div className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
+            {/* 왼쪽 영역 */}
+          </div>
           <div className="flex items-center pr-6 ">
             <button type="button" onClick={handleClickSignIn} className="bg-white">
               SignIn

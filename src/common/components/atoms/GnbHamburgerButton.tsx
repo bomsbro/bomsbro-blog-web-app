@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useEffect, useRef } from "react";
 import lottie from "lottie-web";
-import swimming from "../../assets/swimming-lottie.json";
+import hamburger from "@common/assets/hamburger-lottie.json";
 
 interface GnbHamburgerButtonProps {
   isOpened?: boolean;
@@ -14,9 +14,9 @@ const GnbHamburgerButton: React.FC<GnbHamburgerButtonProps> = ({ isOpened, onCli
     lottie.loadAnimation({
       container: lottieIcon.current,
       renderer: "svg",
-      loop: true,
-      autoplay: true,
-      animationData: swimming,
+      loop: false,
+      autoplay: false,
+      animationData: hamburger,
     });
   }, []);
 

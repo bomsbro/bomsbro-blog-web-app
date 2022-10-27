@@ -2,7 +2,7 @@ name: bomsbro-blog-webapp
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "develop" ]
     
 jobs:
   build:
@@ -33,18 +33,6 @@ jobs:
           ${{secrets.REMOTE_USERNAME}} 
           ${{secrets.REMOTE_PASSWORD}}
           'bomsbro-blog-web-app_nextjs'
-
-       # CLEAN UP IMAGES ON INSTANCE
-      - name: Prune Images
-        run: |
-          sudo apt-get install expect
-          expect -c "
-          set timeout 5
-          spawn sshpass -p \"${secrets.REMOTE_PASSWORD}\" ssh -p \"${secrets.REMOTE_SSH_PORT}\" \"${secrets.REMOTE_USERNAME@$REMOTE_HOST}\" -o StrictHostKeyChecking=no \'docker image prune\'
-          expect -nocase \"\[y/N\]\"
-          send \"y\"
-          exit 0
-          "
 
       # SING IN DOCKER HUB
       #- name: Sign in

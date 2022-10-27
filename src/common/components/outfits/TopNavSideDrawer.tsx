@@ -29,16 +29,24 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
           </div>
         </transition>
       */}
+      {/* Back Drop */}
       <div
-        className="fixed inset-0 w-full h-full z-30 bg-gray-700 bg-opacity-75 transition-opacity sm:hidden"
+        className="fixed inset-0 w-full h-full z-30 bg-gray-700 bg-opacity-75 sm:hidden"
         onClick={handleClose}
         onKeyDown={handleClose}
         role="button"
         tabIndex={0}
       >
-        <aside className="fixed h-full top-0 left-0 w-64 bg-white overflow-auto ease-in-out transform transition-all duration-300 z-50 rounded-tr-3xl">
+        {/* Left Drawer */}
+        <aside className="fixed w-2/3 h-full rounded-tr-3xl bg-white overflow-auto animate-left-draw z-50 transform">
           <span className="flex w-full items-center p-4 border-b">
-            <img src="/logos/fox-hub.png" alt="Logo" className="h-auto w-32 mx-auto" />
+            <img
+              width={300}
+              height={300}
+              src="https://picsum.photos/300/300"
+              alt="Logo"
+              className="h-auto w-32 mx-auto"
+            />
           </span>
           {gnbMenu.map(item => {
             return (
@@ -87,7 +95,6 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
               href="https://www.buymeacoffee.com/fayazahmed"
               target="_blank"
             >
-              <img className="mr-2 h-8 w-auto" src="/sidebar/bmc.svg" alt="Buy Me Coffee" />
               <p>
                 <span className="font-bold">Buy me a Coffee</span>
                 <br />
