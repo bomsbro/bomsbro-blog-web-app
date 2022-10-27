@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "left-draw": "left-draw 0.5s ease-in-out",
+        "left-draw": "left-draw 0.5s ease-in-out both",
       },
       keyframes: {
         "left-draw": {
