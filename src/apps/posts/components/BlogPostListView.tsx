@@ -61,13 +61,6 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({ postCategoryId }) =
       <div className="flex flex-wrap py-6">
         {/* Sidebar Section */}
         <aside className="w-full md:w-1/3 flex flex-col items-center px-3">
-          {/* Mobile MenuBar */}
-          <div className="w-full md:hidden pt-1 pb-2 container mx-auto flex flex-wrap items-center justify-between">
-            <div className="flex items-center">
-              <MenuAlt2Icon className="w-7 h-7 ml-1 mr-4" onClick={() => console.log("하이")} />
-              <p>Post Categories</p>
-            </div>
-          </div>
           {/* Web Menu SideBar */}
           <div className="hidden md:flex w-full bg-white shadow flex-col my-4 p-6">
             <p className="text-xl font-semibold pb-5">카테고리</p>
@@ -91,22 +84,18 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({ postCategoryId }) =
                 미분류
               </li>
             </Link>
+            <Link href="/posts/write">
+              <button
+                type="button"
+                className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4"
+              >
+                글쓰기
+              </button>
+            </Link>
           </div>
-          <Link href="/posts/write">
-            <button
-              type="button"
-              className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4"
-            >
-              글쓰기
-            </button>
-          </Link>
         </aside>
         {/* Posts Section */}
         <section className="w-full md:w-2/3 flex flex-col items-center px-3">
-          {/* Posts Section Header */}
-          <div className="w-full flex flex-col shadow my-4">
-            <h1>하이{currentCategory.name}</h1>
-          </div>
           {/* Post Item */}
           {postList?.map((item: any) => {
             return (

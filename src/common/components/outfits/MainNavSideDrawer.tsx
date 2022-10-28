@@ -6,32 +6,12 @@ interface TopNavSideDrawerProps {
   handleClose(): Promise<void>;
 }
 
-const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
+const MainNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
   return (
     <ModalPortal>
-      {/*
-        <transition
-          enter-className="opacity-0"
-          enter-active-className="ease-out transition-medium"
-          enter-to-className="opacity-100"
-          leave-className="opacity-100"
-          leave-active-className="ease-out transition-medium"
-          leave-to-className="opacity-0"
-        >
-          <div
-            v-show="isOpen"
-            className="z-10 fixed inset-0 transition-opacity"
-          >
-            <div
-              className="absolute inset-0 bg-black opacity-50"
-              tabIndex="0"
-            />
-          </div>
-        </transition>
-      */}
       {/* Back Drop */}
       <div
-        className="fixed inset-0 w-full h-full z-30 bg-gray-700 bg-opacity-75 sm:hidden"
+        className="fixed inset-0 w-full h-full z-30 bg-gray-700 bg-opacity-75 md:hidden"
         onClick={handleClose}
         onKeyDown={handleClose}
         role="button"
@@ -98,7 +78,7 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
               <p>
                 <span className="font-bold">Buy me a Coffee</span>
                 <br />
-                <span className="text-sm text-white">Help me keep this site alive</span>
+                <span className="text-md text-white">Help me keep this site alive</span>
               </p>
             </a>
           </div>
@@ -108,4 +88,4 @@ const TopNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
   );
 };
 
-export default TopNavSideDrawer;
+export default MainNavSideDrawer;

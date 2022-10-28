@@ -6,10 +6,11 @@ import { useRouter } from "next/router";
 
 const BlogBoardPage: NextPage = () => {
   const router = useRouter();
+  const { postCategoryId } = router.query;
 
   return (
-    <BlogPagesLayout>
-      <BlogPostListView postCategoryId={parseInt(router.query.postCategoryId as string, 10)} />
+    <BlogPagesLayout headerTitle="Posts" mainTitle={postCategoryId?.toString() || "ALL Contents"}>
+      <BlogPostListView postCategoryId={parseInt(postCategoryId as string, 10)} />
     </BlogPagesLayout>
   );
 };

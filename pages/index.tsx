@@ -5,7 +5,7 @@ import React from "react";
 
 const BlogHomePage: NextPage = () => {
   return (
-    <BlogPagesLayout>
+    <BlogPagesLayout headerTitle="Home" mainTitle="Bomsbro" subTitle="FE Developer">
       <BlogHomeView />
     </BlogPagesLayout>
   );

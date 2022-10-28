@@ -4,7 +4,7 @@ import BlogPostWriteView from "@posts/components/BlogPostWriteView";
 
 const PostDetailPage = () => {
   return (
-    <BlogPagesLayout>
+    <BlogPagesLayout headerTitle="Posts" mainTitle="Write">
       <BlogPostWriteView />
     </BlogPagesLayout>
   );

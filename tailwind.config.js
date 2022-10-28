@@ -3,11 +3,15 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        "left-draw": "left-draw 0.5s ease-in-out both",
+        "left-draw": "left-draw 0.3s ease-in-out both",
+        "bottom-draw": "bottom-draw 0.3s ease-in-out both",
       },
       keyframes: {
         "left-draw": {
           "0%": { transform: "translateX(-100%)" },
+        },
+        "bottom-draw": {
+          "0%": { transform: "translateY(100%)" },
         },
       },
     },

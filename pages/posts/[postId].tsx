@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 const PostDetailPage = () => {
   const router = useRouter();
   return (
-    <BlogPagesLayout>
+    <BlogPagesLayout headerTitle="Posts" mainTitle="Detail">
       <BlogPostView postId={parseInt(router.query.postId as string, 10)} />
     </BlogPagesLayout>
   );

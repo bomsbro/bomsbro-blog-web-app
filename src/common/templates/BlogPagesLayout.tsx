@@ -1,16 +1,26 @@
-import Link from "next/link";
 import React, { ReactNode, useState } from "react";
-import TopNavSideDrawer from "src/common/components/outfits/TopNavSideDrawer";
-import gnbMenu from "@common/constants/GnbMenu";
-
+import MainNavSideDrawer from "@src/common/components/outfits/MainNavSideDrawer";
 import SignInDialog from "@common/components/outfits/SignInDialog";
-import GnbHamburgerButton from "@common/components/atoms/GnbHamburgerButton";
+import { SearchIcon, MenuIcon, HomeIcon } from "@heroicons/react/outline";
+// import GnbHamburgerButton from "@common/components/atoms/GnbHamburgerButton";
+import Link from "next/link";
+import MenuNav from "../components/organisms/MenuNav";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
+  headerTitle: string;
+  mainTitle: string;
+  subTitle?: string;
+  SubMenu?: ReactNode;
 }
 
-const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
+const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
+  headerTitle,
+  mainTitle,
+  subTitle,
+  children,
+  SubMenu,
+}) => {
   const [MenuDrawerVisible, setMenuDrawerVisible] = useState<boolean>(false);
   const [signInDialogVisible, setSignInDialogVisible] = useState<boolean>(false);
 
@@ -30,50 +40,46 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
 
   return (
     <>
+      <title>{`Bomsbro's Blog - ${headerTitle}`}</title>
       {/* <!-- Top Bar Nav --> */}
-      <nav className="fixed w-full z-20 h-14 sm:relative py-4 bg-blue-800 shadow">
-        <nav className="container max-w-screen-xl w-full mx-auto flex flex-wrap items-center justify-between">
-          <div className="flex items-center justify-between font-bold text-sm text-white uppercase no-underline pl-4 ">
-            {/* 왼쪽 영역 */}
+      <nav className="fixed items-center flex w-full z-20 h-14 md:relative bg-blue-800 shadow">
+        <nav className="flex flex-nowrap container max-w-screen-xl w-full mx-auto items-center text-sm text-white  no-underline">
+          <div className="flex flex-none items-center">
+            <div className="ml-3 md:hidden">
+              <Link href="/">
+                <HomeIcon className="w-6 h-6 m-1" />
+              </Link>
+            </div>
           </div>
-          <div className="flex items-center pr-6 ">
-            <button type="button" onClick={handleClickSignIn} className="bg-white">
-              SignIn
-            </button>
-            <div className="sm:hidden">
-              <GnbHamburgerButton onClick={handleClickMenu} />
+          <div className="flex flex-auto items-center justify-center font-bold text-lg uppercase">
+            <h1 className="md:hidden">{headerTitle}</h1>
+          </div>
+          <div className="flex flex-none flex-row-reverse items-center md:hidden">
+            <div className="mr-2">
+              <MenuIcon className="w-6 h-6 m-1" onClick={handleClickMenu} />
+            </div>
+            <div className="mr-1">
+              <SearchIcon className="w-6 h-6 m-1" />
             </div>
           </div>
         </nav>
       </nav>
 
       {/* <!-- Text Header --> */}
-      <header className="pt-14 sm:pt-0 w-full container mx-auto">
+      <header className="pt-14 md:pt-0 w-full container mx-auto">
         <div className="container max-w-screen-xl w-full mx-auto flex flex-col items-center py-12">
           <a className="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
-            Bomsbro
+            {mainTitle}
           </a>
-          <p className="text-lg text-gray-600">FE Developer</p>
+          <p className="text-lg text-gray-600">{subTitle}</p>
         </div>
       </header>
 
       {/* <!-- Menu Nav Web--> */}
-      <nav className="w-full sticky top-14 sm:relative sm:top-0 py-4 border-t border-b bg-gray-100">
-        <div className="w-full flex-grow hidden sm:flex sm:items-center sm:w-auto">
-          <div className="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-            {gnbMenu.map(menu => {
-              return (
-                <Link key={menu.key} href={menu.path}>
-                  <a className="hover:bg-gray-400 rounded py-2 px-4 mx-2">{menu.name}</a>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </nav>
+      <MenuNav SubMenu={SubMenu} />
 
       {/* <!-- Contents --> */}
-      <div className="container max-w-screen-xl w-full mx-auto">{children}</div>
+      <div className="container min-h-full max-w-screen-xl w-full mx-auto">{children}</div>
 
       {/* <!-- Footer --> */}
       <footer className="w-full border-t bg-white pb-12">
@@ -98,7 +104,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({ children }) => {
 
       {/* <!--Global Menu Drawer --> */}
       {MenuDrawerVisible && (
-        <TopNavSideDrawer
+        <MainNavSideDrawer
           handleClose={async () => {
             setMenuDrawerVisible(false);
           }}

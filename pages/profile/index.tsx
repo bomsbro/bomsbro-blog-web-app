@@ -5,7 +5,7 @@ import React from "react";
 
 const index: NextPage = () => {
   return (
-    <BlogPagesLayout>
+    <BlogPagesLayout headerTitle="Profile" mainTitle="About Me">
       <BlogProfileView />
     </BlogPagesLayout>
   );

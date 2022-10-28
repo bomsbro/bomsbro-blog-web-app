@@ -23,7 +23,7 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
 
       <article className="w-full flex flex-col shadow my-4">
         {/* Article Image */}
-        <a href="#" className="hover:opacity-75">
+        <div className="hover:opacity-75 hidden md:block">
           <img
             width={1280}
             height={500}
@@ -31,7 +31,7 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
             src="https://source.unsplash.com/collection/1346951/1280x500?sig=1"
             alt="로딩중"
           />
-        </a>
+        </div>
         <div className="bg-white flex flex-col justify-start p-6">
           {/* Post Category */}
           <a href="#" className="text-blue-700 text-sm font-bold uppercase pb-4">

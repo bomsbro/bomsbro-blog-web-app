@@ -19,14 +19,12 @@ const BlogProjectsView: React.FC = () => {
     <>
       <div className="flex flex-row justify-between items-center ">
         <div className="pt-6 space-y-2 md:space-y-5 md:pb-8">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Projects
+          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl md:leading-14">
+            Repos
           </h1>
           <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {
-              `I am part of these ${(data?.data.length || 1) - 1} 
-            projects.` /* TODO: 1개 빼줘야 함 */
-            }
+            {`I am part of these ${(data?.data.length || 1) - 1} 
+            projects.`}
           </p>
         </div>
         <div className="md:pr-4">
@@ -49,17 +47,11 @@ const BlogProjectsView: React.FC = () => {
           </div>
         </div>
       </div>
-      <main className="relative mb-auto">
-        <div className="">
-          <div className="container py-12">
-            <div className="flex flex-wrap -m-4">
-              {data?.data.map((project: any) => {
-                if (project.name === "bomsbro") return null; // Except project information Repo
-                return <ProjectCard key={project.id} project={project} />;
-              })}
-            </div>
-          </div>
-        </div>
+      <main className="container w-full py-12 relative mb-auto flex flex-wrap -m-4">
+        {data?.data.map((project: any) => {
+          if (project.name === "bomsbro") return null; // Except project information Repo
+          return <ProjectCard key={project.id} project={project} />;
+        })}
       </main>
     </>
   );
