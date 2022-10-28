@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "env-cmd -f .env/.env.dev next dev",
-    "dev:prod": "env-cmd -f .env/.env.prod next dev",
+    "dev": "tsc && env-cmd -f .env/.env.dev next dev",
+    "dev:prod": "tsc && env-cmd -f .env/.env.prod next dev",
     "build": "env-cmd -f .env/.env.prod next build",
     "start": "next start",
     "lint": "next lint",

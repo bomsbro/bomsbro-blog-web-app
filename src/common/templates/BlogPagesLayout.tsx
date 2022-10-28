@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useEffect, useRef, useState } from "react";
 import MainNavSideDrawer from "@src/common/components/outfits/MainNavSideDrawer";
 import SignInDialog from "@common/components/outfits/SignInDialog";
 import { SearchIcon, MenuIcon, HomeIcon } from "@heroicons/react/outline";
@@ -8,8 +8,8 @@ import MenuNav from "../components/organisms/MenuNav";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
-  headerTitle: string;
-  mainTitle: string;
+  headerTitle?: string;
+  mainTitle?: string;
   subTitle?: string;
   SubMenu?: ReactNode;
 }
@@ -23,7 +23,28 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
 }) => {
   const [MenuDrawerVisible, setMenuDrawerVisible] = useState<boolean>(false);
   const [signInDialogVisible, setSignInDialogVisible] = useState<boolean>(false);
+  const [titleOpacity, setTitleOpacity] = useState<number>(0);
+  const headerTextRef = useRef<HTMLElement>(null);
 
+  /* Observe Text Header for Opacity 
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+          setTitleOpacity(1 - entry.intersectionRatio);
+          observer.observe(entry.target);
+          console.log("호");
+        }
+        console.log("야");
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(headerTextRef.current as Element);
+    return () => observer.disconnect();
+  }, []);
+*/
   const initModals = () => {
     setMenuDrawerVisible(false);
     setSignInDialogVisible(false);
@@ -53,6 +74,7 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
           </div>
           <div className="flex flex-auto items-center justify-center font-bold text-lg uppercase">
             <h1 className="md:hidden">{headerTitle}</h1>
+            <p>{titleOpacity}</p>
           </div>
           <div className="flex flex-none flex-row-reverse items-center md:hidden">
             <div className="mr-2">
@@ -66,10 +88,10 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
       </nav>
 
       {/* <!-- Text Header --> */}
-      <header className="pt-14 md:pt-0 w-full container mx-auto">
+      <header ref={headerTextRef} className="pt-14 md:pt-0 w-full container mx-auto">
         <div className="container max-w-screen-xl w-full mx-auto flex flex-col items-center py-12">
           <a className="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
-            {mainTitle}
+            {mainTitle || headerTitle}
           </a>
           <p className="text-lg text-gray-600">{subTitle}</p>
         </div>

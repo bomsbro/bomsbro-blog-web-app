@@ -9,7 +9,7 @@ const BlogBoardPage: NextPage = () => {
   const { postCategoryId } = router.query;
 
   return (
-    <BlogPagesLayout headerTitle="Posts" mainTitle={postCategoryId?.toString() || "ALL Contents"}>
+    <BlogPagesLayout headerTitle="Posts">
       <BlogPostListView postCategoryId={parseInt(postCategoryId as string, 10)} />
     </BlogPagesLayout>
   );
