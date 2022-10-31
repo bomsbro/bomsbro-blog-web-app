@@ -1,9 +1,6 @@
 module.exports = {
   purge: ["./pages/**/*.{js,ts,jsx,tsx}", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    rtl: {
-      direction: "rtl",
-    },
     extend: {
       animation: {
         "left-draw": "left-draw 0.3s ease-in-out both",

@@ -11,8 +11,12 @@ const BlogPostView: React.FC<BlogPostViewProps> = ({ postId }) => {
     return axios.get(`https://bomsbro.com/api/posts/${postId}`);
   };
 
-  const { data: post, error: postError } = useQuery(["post", postId], fetchPost, {});
-
+  const { data: post, error: postError } = useQuery(["post", postId], fetchPost, {
+    onSuccess: async res => {
+      // 성공시 호출
+      console.log(res);
+    },
+  });
   return (
     <div className="w-full flex flex-wrap py-6">
       {/* Post Section */}
