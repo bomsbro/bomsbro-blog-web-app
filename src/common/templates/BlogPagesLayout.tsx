@@ -23,21 +23,28 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
 }) => {
   const [MenuDrawerVisible, setMenuDrawerVisible] = useState<boolean>(false);
   const [signInDialogVisible, setSignInDialogVisible] = useState<boolean>(false);
-  const [titleVisible, setTitleVisible] = useState<boolean>(false);
+  const [titleOpacity, setTitleOpacity] = useState<number>(0);
   const headerTextRef = useRef<HTMLElement>(null);
+
+  /* Observe Text Header for Opacity 
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      entry => {
-        if (entry[0].intersectionRatio < 0.3) setTitleVisible(true);
-        else setTitleVisible(false);
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+          setTitleOpacity(1 - entry.intersectionRatio);
+          observer.observe(entry.target);
+          console.log("호");
+        }
+        console.log("야");
       },
-      { threshold: 0.3 },
+      { threshold: 0.25 },
     );
     observer.observe(headerTextRef.current as Element);
     return () => observer.disconnect();
   }, []);
-
+*/
   const initModals = () => {
     setMenuDrawerVisible(false);
     setSignInDialogVisible(false);
@@ -66,8 +73,8 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
             </div>
           </div>
           <div className="flex flex-auto items-center justify-center font-bold text-lg uppercase">
-            {titleVisible && <h1 className="md:hidden animate-title-appear">{headerTitle}</h1>}
-            <h1>{titleVisible}</h1>
+            <h1 className="md:hidden">{headerTitle}</h1>
+            <p>{titleOpacity}</p>
           </div>
           <div className="flex flex-none flex-row-reverse items-center md:hidden">
             <div className="mr-2">
@@ -79,10 +86,9 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
           </div>
         </nav>
       </nav>
-      {/* Dummy Elem for Fixed header */}
-      <div className="h-14 md:hidden" />
+
       {/* <!-- Text Header --> */}
-      <header ref={headerTextRef} className="h-44 md:pt-0 w-full container mx-auto">
+      <header ref={headerTextRef} className="pt-14 md:pt-0 w-full container mx-auto">
         <div className="container max-w-screen-xl w-full mx-auto flex flex-col items-center py-12">
           <a className="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
             {mainTitle || headerTitle}
