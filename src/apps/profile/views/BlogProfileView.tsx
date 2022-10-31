@@ -1,3 +1,4 @@
+import SubAppBar from "@src/common/components/organisms/SubAppBar";
 import React from "react";
 
 const AuthorCard: React.FC = () => {
@@ -176,16 +177,19 @@ const TimeLine: React.FC = () => {
 
 const BlogProfileView: React.FC = () => {
   return (
-    <div className="w-full md:flex mx-auto">
-      <div className="md:w-1/3 p-2 md:flex md:justify-center">
-        <AuthorCard />
+    <>
+      <SubAppBar />
+      <div className="w-full md:flex mx-auto">
+        <div className="md:w-1/3 p-2 md:flex md:justify-center">
+          <AuthorCard />
+        </div>
+        <div className="md:w-2/3 px-8">
+          <AuthorIntro />
+          <Expertise />
+          <TimeLine />
+        </div>
       </div>
-      <div className="md:w-2/3 px-8">
-        <AuthorIntro />
-        <Expertise />
-        <TimeLine />
-      </div>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,5 @@
 import gnbMenu from "@common/constants/GnbMenu";
+import { useRouter } from "next/router";
 import React from "react";
 import ModalPortal from "./ModalPortal";
 
@@ -7,6 +8,8 @@ interface TopNavSideDrawerProps {
 }
 
 const MainNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => {
+  const router = useRouter();
+  const currentPath = router.pathname.split("/")[1];
   return (
     <ModalPortal>
       {/* Back Drop */}
@@ -31,7 +34,13 @@ const MainNavSideDrawer: React.FC<TopNavSideDrawerProps> = ({ handleClose }) => 
           {gnbMenu.map(item => {
             return (
               <a key={item.key} href={item.path}>
-                <span className="flex items-center p-4 hover:bg-indigo-500 hover:text-white ">
+                <span
+                  className={"flex items-center p-4 ".concat(
+                    `/${currentPath}` === item.path
+                      ? "bg-indigo-400 text-white"
+                      : "hover:bg-indigo-200",
+                  )}
+                >
                   <span className="mr-2">
                     <svg
                       fill="none"

@@ -1,10 +1,12 @@
 import AboutMe from "@home/components/AboutMe";
 import InstaGallery from "@home/components/InstaGallery";
+import SubAppBar from "@src/common/components/organisms/SubAppBar";
 import React from "react";
 
 const BlogHomeView = () => {
   return (
     <>
+      <SubAppBar />
       {/* Content Area */}
       <div className="flex flex-wrap py-6">
         {/* Posts Section */}

@@ -2,6 +2,7 @@ import { MenuAlt2Icon } from "@heroicons/react/outline";
 import Link from "next/link";
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import SubAppBar from "@src/common/components/organisms/SubAppBar";
 
 const BlogPostWriteView: React.FC = () => {
   const editorRef = useRef<any>(null);
@@ -13,6 +14,7 @@ const BlogPostWriteView: React.FC = () => {
 
   return (
     <>
+      <SubAppBar />
       {/* Content Area */}
       <div className="flex flex-wrap py-6">
         {/* Posts Section */}

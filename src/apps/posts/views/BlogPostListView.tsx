@@ -1,62 +1,47 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 import postCategoryRepository from "@posts/modules/repository/postCategoryRepository";
 import postRepository from "@posts/modules/repository/postRepository";
+import SubAppBar from "@src/common/components/organisms/SubAppBar";
+import SubNavBottomDrawer from "@src/common/components/outfits/SubNavBottomDrawer";
 import Link from "next/link";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import getTimeDiffString from "src/common/utils/blogUtils";
 
 interface BlogPostListViewProps {
-  postCategoryId: number;
+  currentCategory: any;
+  categoryList: any;
 }
 
-const BlogPostListView: React.FC<BlogPostListViewProps> = ({ postCategoryId }) => {
+const BlogPostListView: React.FC<BlogPostListViewProps> = ({ currentCategory, categoryList }) => {
+  const [subNavOpen, setSubNavOpen] = useState<boolean>(false);
   const { data: postList, error: postListError } = useQuery<any, any, any>(
-    ["post-list", postCategoryId],
+    ["post-list", currentCategory],
     async () => {
       let res;
-      if (postCategoryId || postCategoryId === 0)
-        res = await postRepository.getPostList(postCategoryId);
-      res = await postRepository.getAllPostList();
-
-      console.log(res);
-
+      if (currentCategory?.id || currentCategory?.id === 0)
+        res = await postRepository.getPostList(currentCategory?.id);
+      else res = await postRepository.getAllPostList(); // 현재 카테고리가 없으면 전체게시판
       return res;
     },
-    {
-      onSuccess: async res => {
-        // 성공시 호출
-        console.log(res);
-      },
-    },
   );
-
-  const { data: categoryList, error: categoryListError } = useQuery<any, any, any>(
-    "post-categories",
-    async () => {
-      const res = await postCategoryRepository.getPostCategoryList();
-      console.log(res);
-      return res;
-    },
-    {
-      onSuccess: async res => {
-        // 성공시 호출
-        console.log(res);
-      },
-    },
-  );
-
-  // change to useMemo
-  const currentCategory = useCallback(() => {
-    const filteredCategory = categoryList?.filter((item: any) => {
-      console.log(item.id);
-      return item.id === postCategoryId;
-    });
-    return filteredCategory;
-  }, [postCategoryId, categoryList]);
 
   return (
     <>
+      <SubAppBar
+        mobile={
+          <div className="flex items-center">
+            <MenuAlt2Icon
+              className="w-7 h-7 ml-1 mr-4"
+              onClick={() => {
+                setSubNavOpen(true);
+                // window.scrollBy({ top: 200, behavior: "smooth" });
+              }}
+            />
+            <p>{currentCategory?.name || "전체 게시글"}</p>
+          </div>
+        }
+      />
       {/* Content Area */}
       <div className="flex flex-wrap py-6">
         {/* Sidebar Section */}
@@ -156,7 +141,43 @@ const BlogPostListView: React.FC<BlogPostListViewProps> = ({ postCategoryId }) =
           </div>
         </section>
       </div>
-      ;
+      {subNavOpen && (
+        <SubNavBottomDrawer
+          onClose={async () => {
+            setSubNavOpen(false);
+          }}
+        >
+          <p className="text-xl font-semibold pb-5">카테고리</p>
+          <Link href="/posts">
+            <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+              전체 게시글
+            </li>
+          </Link>
+          {categoryList?.map((item: any) => {
+            if (item.id === 0) return null; // 미분류 게시판은 순서가 맨 밑에 있어야 함
+            return (
+              <Link key={item.id} href={`/posts?postCategoryId=${item.id}`}>
+                <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                  {item.name}
+                </li>
+              </Link>
+            );
+          })}
+          <Link href={`/posts?postCategoryId=${0}`}>
+            <li className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+              미분류
+            </li>
+          </Link>
+          <Link href="/posts/write">
+            <button
+              type="button"
+              className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4"
+            >
+              글쓰기
+            </button>
+          </Link>
+        </SubNavBottomDrawer>
+      )}
     </>
   );
 };

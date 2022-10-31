@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
 import ProjectCard from "@project/components/ProjectCard";
+import SubAppBar from "@src/common/components/organisms/SubAppBar";
 
 const BlogProjectsView: React.FC = () => {
   const fetchProjectList = async () => {
@@ -17,6 +18,7 @@ const BlogProjectsView: React.FC = () => {
 
   return (
     <>
+      <SubAppBar />
       <div className="flex flex-row justify-between items-center ">
         <div className="pt-6 space-y-2 md:space-y-5 md:pb-8">
           <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 md:text-6xl md:leading-14">

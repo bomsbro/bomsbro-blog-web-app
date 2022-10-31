@@ -4,7 +4,6 @@ import SignInDialog from "@common/components/outfits/SignInDialog";
 import { SearchIcon, MenuIcon, HomeIcon } from "@heroicons/react/outline";
 // import GnbHamburgerButton from "@common/components/atoms/GnbHamburgerButton";
 import Link from "next/link";
-import MenuNav from "../components/organisms/MenuNav";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
@@ -90,9 +89,6 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
           <p className="text-lg text-gray-600">{subTitle}</p>
         </div>
       </header>
-
-      {/* <!-- Menu Nav Web--> */}
-      <MenuNav SubMenu={SubMenu} />
 
       {/* <!-- Contents --> */}
       <div className="container min-h-full max-w-screen-xl w-full mx-auto">{children}</div>
