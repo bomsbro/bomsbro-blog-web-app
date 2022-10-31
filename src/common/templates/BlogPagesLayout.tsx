@@ -4,14 +4,12 @@ import SignInDialog from "@common/components/outfits/SignInDialog";
 import { SearchIcon, MenuIcon, HomeIcon } from "@heroicons/react/outline";
 // import GnbHamburgerButton from "@common/components/atoms/GnbHamburgerButton";
 import Link from "next/link";
-import MenuNav from "../components/organisms/MenuNav";
 
 interface BlogPagesLayoutProps {
   children: ReactNode;
   headerTitle?: string;
   mainTitle?: string;
   subTitle?: string;
-  SubMenu?: ReactNode;
 }
 
 const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
@@ -19,7 +17,6 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
   mainTitle,
   subTitle,
   children,
-  SubMenu,
 }) => {
   const [MenuDrawerVisible, setMenuDrawerVisible] = useState<boolean>(false);
   const [signInDialogVisible, setSignInDialogVisible] = useState<boolean>(false);
@@ -90,9 +87,6 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
           <p className="text-lg text-gray-600">{subTitle}</p>
         </div>
       </header>
-
-      {/* <!-- Menu Nav Web--> */}
-      <MenuNav SubMenu={SubMenu} />
 
       {/* <!-- Contents --> */}
       <div className="container min-h-full max-w-screen-xl w-full mx-auto">{children}</div>
