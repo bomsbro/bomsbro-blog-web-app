@@ -1,9 +1,9 @@
 import BlogPagesLayout from "src/common/templates/BlogPagesLayout";
 import { NextPage } from "next";
 import React, { useCallback, useEffect, useMemo } from "react";
-import BlogPostListView from "@src/apps/posts/views/BlogPostListView";
+import BlogPostListView from "@src/features/posts/views/BlogPostListView";
 import { useRouter } from "next/router";
-import postCategoryRepository from "@src/apps/posts/modules/repository/postCategoryRepository";
+import postCategoryRepository from "@src/features/posts/modules/repository/postCategoryRepository";
 import { useQuery } from "react-query";
 
 const BlogBoardPage: NextPage = () => {

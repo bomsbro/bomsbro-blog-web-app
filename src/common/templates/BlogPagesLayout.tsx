@@ -10,7 +10,6 @@ interface BlogPagesLayoutProps {
   headerTitle?: string;
   mainTitle?: string;
   subTitle?: string;
-  SubMenu?: ReactNode;
 }
 
 const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
@@ -18,22 +17,26 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
   mainTitle,
   subTitle,
   children,
-  SubMenu,
 }) => {
   const [MenuDrawerVisible, setMenuDrawerVisible] = useState<boolean>(false);
   const [signInDialogVisible, setSignInDialogVisible] = useState<boolean>(false);
   const [titleVisible, setTitleVisible] = useState<boolean>(false);
-  const headerTextRef = useRef<HTMLElement>(null);
+
+  /* For Fade in&out */
+  const mainAppBarEl = useRef<HTMLDivElement>(null);
+  const headerTextEl = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const threshold = 0.25;
     const observer = new IntersectionObserver(
       entry => {
-        if (entry[0].intersectionRatio < 0.3) setTitleVisible(true);
+        // console.log(entry[0].intersectionRatio);
+        if (entry[0].intersectionRatio < threshold) setTitleVisible(true);
         else setTitleVisible(false);
       },
-      { threshold: 0.3 },
+      { rootMargin: `-${mainAppBarEl.current?.clientHeight}px`, threshold },
     );
-    observer.observe(headerTextRef.current as Element);
+    observer.observe(headerTextEl.current as Element);
     return () => observer.disconnect();
   }, []);
 
@@ -54,8 +57,11 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
   return (
     <>
       <title>{`Bomsbro's Blog - ${headerTitle}`}</title>
-      {/* <!-- Top Bar Nav --> */}
-      <nav className="fixed items-center flex w-full z-20 h-14 md:relative bg-blue-800 shadow">
+      {/* <!-- Main App Bar --> */}
+      <nav
+        ref={mainAppBarEl}
+        className="fixed items-center flex w-full z-20 h-14 md:relative bg-blue-800 shadow"
+      >
         <nav className="flex flex-nowrap container max-w-screen-xl w-full mx-auto items-center text-sm text-white  no-underline">
           <div className="flex flex-none items-center">
             <div className="ml-3 md:hidden">
@@ -81,8 +87,11 @@ const BlogPagesLayout: React.FC<BlogPagesLayoutProps> = ({
       {/* Dummy Elem for Fixed header */}
       <div className="h-14 md:hidden" />
       {/* <!-- Text Header --> */}
-      <header ref={headerTextRef} className="h-44 md:pt-0 w-full container mx-auto">
-        <div className="container max-w-screen-xl w-full mx-auto flex flex-col items-center py-12">
+      <header className="h-44 md:pt-0 w-full container mx-auto">
+        <div
+          ref={headerTextEl}
+          className="container max-w-screen-xl w-full mx-auto flex flex-col items-center py-12"
+        >
           <a className="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
             {mainTitle || headerTitle}
           </a>

@@ -1,6 +1,6 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
-import postCategoryRepository from "@posts/modules/repository/postCategoryRepository";
-import postRepository from "@posts/modules/repository/postRepository";
+import postCategoryRepository from "@src/features/posts/modules/repository/postCategoryRepository";
+import postRepository from "@src/features/posts/modules/repository/postRepository";
 import SubAppBar from "@src/common/components/organisms/SubAppBar";
 import SubNavBottomDrawer from "@src/common/components/outfits/SubNavBottomDrawer";
 import Link from "next/link";

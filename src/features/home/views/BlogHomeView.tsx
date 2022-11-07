@@ -1,5 +1,5 @@
-import AboutMe from "@home/components/AboutMe";
-import InstaGallery from "@home/components/InstaGallery";
+import AboutMe from "@src/features/home/components/AboutMe";
+import InstaGallery from "@src/features/home/components/InstaGallery";
 import SubAppBar from "@src/common/components/organisms/SubAppBar";
 import React from "react";
 

@@ -18,10 +18,10 @@
     "paths": {
       "@src/*": ["src/*"],
       "@common/*": ["src/common/*"],
-      "@home/*": ["src/apps/home/*"],
-      "@posts/*": ["src/apps/posts/*"],
-      "@profile/*": ["src/apps/profile/*"],
-      "@project/*": ["src/apps/project/*"],
+      "@home/*": ["src/features/home/*"],
+      "@posts/*": ["src/features/posts/*"],
+      "@profile/*": ["src/features/profile/*"],
+      "@project/*": ["src/features/project/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

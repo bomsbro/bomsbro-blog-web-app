@@ -1,5 +1,5 @@
 import BlogPagesLayout from "src/common/templates/BlogPagesLayout";
-import BlogProfileView from "src/apps/profile/views/BlogProfileView";
+import BlogProfileView from "@src/features/profile/views/BlogProfileView";
 import { NextPage } from "next";
 import React from "react";
 

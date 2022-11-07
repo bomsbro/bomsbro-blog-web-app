@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useQuery } from "react-query";
-import ProjectCard from "@project/components/ProjectCard";
+import ProjectCard from "@src/features/project/components/ProjectCard";
 import SubAppBar from "@src/common/components/organisms/SubAppBar";
 
 const BlogProjectsView: React.FC = () => {
