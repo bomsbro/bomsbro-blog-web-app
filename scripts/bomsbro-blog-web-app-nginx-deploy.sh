@@ -13,7 +13,7 @@ docker save $IMAGE_REPOSITORY | bzip2 | sshpass -p $REMOTE_PASSWORD ssh -p $REMO
 
 sshpass -p $REMOTE_PASSWORD ssh -p $REMOTE_SSH_PORT $REMOTE_USERNAME@$REMOTE_HOST -o StrictHostKeyChecking=no << EOF
 	docker rm -f $IMAGE_REPOSITORY || true
-	docker run -d --net host --name $IMAGE_REPOSITORY --restart always -v /var/data/certbot/conf:/etc/letsencrypt -v /var/data/certbot/www:/var/www/certbot $IMAGE_REPOSITORY
+	docker run -d --net host --name $IMAGE_REPOSITORY --restart always -v /var/data/certbot/conf:/etc/letsencrypt -v /var/data/certbot/www:/var/www/certbot -v /var/data/nginx:/etc/nginx $IMAGE_REPOSITORY
 	expect -c "
 		set timeout 5
 		spawn docker image prune
