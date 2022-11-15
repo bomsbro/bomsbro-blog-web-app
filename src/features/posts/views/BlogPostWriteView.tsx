@@ -1,49 +1,64 @@
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 import Link from "next/link";
-import React, { useRef } from "react";
-import { Editor } from "@tinymce/tinymce-react";
+import React, { ReactNode, useRef, useState } from "react";
+
 import SubAppBar from "@src/common/components/organisms/SubAppBar";
+import { useForm } from "react-hook-form";
+import CustomEditor from "@src/common/components/organisms/CustomEditor";
 
 const BlogPostWriteView: React.FC = () => {
-  const editorRef = useRef<any>(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+  const [postWriteData, setPostWriteData] = useState({
+    title: "",
+    content: "",
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const editorRef = useRef<unknown>(null);
+
+  const handleClickTempSaveButton = handleSubmit(async (data: any) => {
+    setPostWriteData(data);
+  });
+
+  const handleClickSaveButton = handleSubmit(async (data: any) => {
+    setPostWriteData(data);
+  });
 
   return (
     <>
       <SubAppBar />
       {/* Content Area */}
       <div className="flex flex-wrap py-6">
-        {/* Posts Section */}
+        {/* Write Post Section */}
+
         <section className="w-full md:w-4/5 flex flex-col items-center px-3">
-          {/* TinyMce Editor */}
-          <Editor
-            onInit={(evt, editor) => {
-              editorRef.current = editor;
-              return editorRef;
-            }}
-            initialValue="<p>This is the initial content of the editor.</p>"
-            init={{
-              width: "100%",
-              height: 500,
-              menubar: false,
-              plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste code help wordcount",
-              ],
-              toolbar:
-                "undo redo | formatselect | " +
-                "bold italic backcolor | alignleft aligncenter " +
-                "alignright alignjustify | bullist numlist outdent indent | " +
-                "removeformat | help",
-              content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-            }}
-          />
+          <form>
+            <div className="mb-4">
+              <label className="block text-sm font-bold mb-2" htmlFor="email">
+                Title
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+                  id="email"
+                  type="email"
+                  placeholder="Email Address"
+                  {...register("title", { required: true })}
+                />
+              </label>
+              {errors.email && <span className="text-xs text-red-500">This field is required</span>}
+            </div>
+            <CustomEditor
+              onInit={(event, editor) => {
+                editorRef.current = editor;
+                return editorRef;
+              }}
+              {...register("email", { required: true })}
+            />
+          </form>
         </section>
+
         {/* Sidebar Section */}
         <aside className="w-full md:w-1/5 flex flex-col items-center px-3">
           {/* Web Menu SideBar */}
@@ -61,6 +76,7 @@ const BlogPostWriteView: React.FC = () => {
           </div>
           <Link href="/posts/write">
             <button
+              onClick={handleClickTempSaveButton}
               type="button"
               className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4"
             >
@@ -69,6 +85,7 @@ const BlogPostWriteView: React.FC = () => {
           </Link>
           <Link href="/posts/write">
             <button
+              onClick={handleClickSaveButton}
               type="button"
               className="w-full bg-blue-800 text-white font-bold text-sm uppercase rounded hover:bg-blue-700 flex items-center justify-center px-2 py-3 mt-4"
             >
