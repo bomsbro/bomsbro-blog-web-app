@@ -1,12 +1,14 @@
-import { MenuAlt2Icon } from "@heroicons/react/outline";
 import Link from "next/link";
-import React, { ReactNode, useRef, useState } from "react";
-
+import React, { useRef, useState } from "react";
 import SubAppBar from "@src/common/components/organisms/SubAppBar";
-import { useForm } from "react-hook-form";
 import CustomEditor from "@src/common/components/organisms/CustomEditor";
+import { useForm } from "react-hook-form";
 
-const BlogPostWriteView: React.FC = () => {
+interface BlogPostWriteViewProps {
+  categoryList: any;
+}
+
+const BlogPostWriteView: React.FC<BlogPostWriteViewProps> = ({ categoryList }) => {
   const [postWriteData, setPostWriteData] = useState({
     title: "",
     content: "",
@@ -35,18 +37,33 @@ const BlogPostWriteView: React.FC = () => {
         {/* Write Post Section */}
 
         <section className="w-full md:w-4/5 flex flex-col items-center px-3">
-          <form>
+          <form className="w-full">
             <div className="mb-4">
-              <label className="block text-sm font-bold mb-2" htmlFor="email">
-                Title
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
-                  id="email"
-                  type="email"
-                  placeholder="Email Address"
-                  {...register("title", { required: true })}
-                />
-              </label>
+              <select
+                id="category"
+                placeholder="Category"
+                className="shadow border rounded w-full py-2 px-3 text-grey-darker"
+                defaultValue=""
+                {...register("category", { required: true })}
+              >
+                <option value="">Category</option>
+                {categoryList?.map((item: any) => {
+                  if (item.id === 0) return null; // 미분류 게시판은 순서가 맨 밑에 있어야 함
+                  return (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="mb-4">
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+                id="email"
+                placeholder="Title"
+                {...register("title", { required: true })}
+              />
               {errors.email && <span className="text-xs text-red-500">This field is required</span>}
             </div>
             <CustomEditor
@@ -54,7 +71,8 @@ const BlogPostWriteView: React.FC = () => {
                 editorRef.current = editor;
                 return editorRef;
               }}
-              {...register("email", { required: true })}
+              placeholder="Content"
+              {...register("content", { required: true })}
             />
           </form>
         </section>
