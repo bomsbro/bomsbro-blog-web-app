@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import SubAppBar from "@src/common/components/organisms/SubAppBar";
-import CustomEditor from "@src/common/components/organisms/CustomEditor";
 import { useForm } from "react-hook-form";
+import CustomEditor from "@src/common/components/organisms/CustomEditor";
 
 interface BlogPostWriteViewProps {
   categoryList: any;
@@ -19,7 +19,7 @@ const BlogPostWriteView: React.FC<BlogPostWriteViewProps> = ({ categoryList }) =
     formState: { errors },
   } = useForm();
 
-  const editorRef = useRef<unknown>(null);
+  const editorRef = useRef<any>(null);
 
   const handleClickTempSaveButton = handleSubmit(async (data: any) => {
     setPostWriteData(data);
@@ -69,7 +69,6 @@ const BlogPostWriteView: React.FC<BlogPostWriteViewProps> = ({ categoryList }) =
             <CustomEditor
               onInit={(event, editor) => {
                 editorRef.current = editor;
-                return editorRef;
               }}
               placeholder="Content"
               {...register("content", { required: true })}
