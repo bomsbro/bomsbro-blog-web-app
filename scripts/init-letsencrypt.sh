@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=("bomsbro.com" "www.bomsbro.com", "storage.bomsbro.com", "www.storage.bomsbro.com", "s3.bomsbro.com", "www.s3.bomsbro.com")
+domains=("bomsbro.com" "www.bomsbro.com" "storage.bomsbro.com" "www.storage.bomsbro.com" "s3.bomsbro.com" "www.s3.bomsbro.com")
 rsa_key_size=4096
 data_path="/var/data/certbot"
 email="transcend716@naver.com" # Adding a valid address is strongly recommended
