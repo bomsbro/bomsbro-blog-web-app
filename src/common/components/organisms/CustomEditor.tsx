@@ -54,6 +54,7 @@ const CustomEditor: React.FC<CustomEditorProps> = ({
               if (uploadRes) {
                 console.log(uploadRes);
                 progress(100);
+                // return urlRes.data as string;
               }
             }
 
