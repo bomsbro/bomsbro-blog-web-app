@@ -12,7 +12,7 @@ services:
     container_name: bomsbro-reverse-proxy
     network_mode: "host"
     volumes:
-      - /var/data/nginx:/etc/nginx
+      - /var/data/nginx/conf.d:/etc/nginx/conf.d
       - /var/data/certbot/conf:/etc/letsencrypt # for ssl certification
       - /var/data/certbot/www:/var/www/certbot # for ssl certification
     build: ./nginx
